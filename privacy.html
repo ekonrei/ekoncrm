@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – EKON CRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#08061a;--card:#0d0b1e;--p1:#7c5cef;--p2:#5a3dd6;--p3:#3f27b8;--p4:#a584f8;--p5:#cdb9ff;--white:#fff;--muted:rgba(255,255,255,.45);--muted2:rgba(255,255,255,.72);--border:rgba(124,92,239,.28);--border2:rgba(255,255,255,.07)}
+html{scroll-behavior:smooth}
+
+/* EXTRA ANIMATIONS */
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 20px rgba(124,92,239,.3)}50%{box-shadow:0 0 40px rgba(124,92,239,.6),0 0 80px rgba(124,92,239,.2)}}
+.plan.hot{animation:glowPulse 3s ease-in-out infinite}
+.comp-new{animation:glowPulse 3s ease-in-out infinite}
+
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;cursor:none}
+#prog{position:fixed;top:0;left:0;height:2px;z-index:9999;background:linear-gradient(90deg,var(--p2),var(--p1),var(--p5));width:0%;pointer-events:none}
+#cdot{position:fixed;width:8px;height:8px;border-radius:50%;background:var(--p1);pointer-events:none;z-index:9990;transform:translate(-50%,-50%);box-shadow:0 0 10px rgba(124,92,239,.6)}
+#cring{position:fixed;width:32px;height:32px;border-radius:50%;border:1px solid rgba(124,92,239,.5);pointer-events:none;z-index:9989;transform:translate(-50%,-50%);transition:width .18s,height .18s,border-color .2s}
+#cv{position:fixed;inset:0;z-index:0;pointer-events:none}
+#ambient{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(100,60,220,.18) 0%,transparent 70%),radial-gradient(ellipse 50% 50% at 0% 100%,rgba(80,40,200,.12) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 100% 50%,rgba(120,70,240,.1) 0%,transparent 60%);animation:ap 8s ease-in-out infinite alternate}
+@keyframes ap{0%{opacity:.65}100%{opacity:1}}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);animation:of 12s ease-in-out infinite}
+.orb1{width:400px;height:400px;background:rgba(90,61,214,.1);top:10%;right:-100px}
+.orb2{width:300px;height:300px;background:rgba(124,92,239,.08);bottom:20%;left:-80px;animation-delay:-4s}
+@keyframes of{0%,100%{transform:translateY(0)}50%{transform:translateY(-25px)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:600;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:rgba(8,6,26,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);transition:background .3s}
+nav.solid{background:rgba(8,6,26,.96)}
+.logo{text-decoration:none;display:flex;flex-direction:column;line-height:1;gap:4px;cursor:none}
+.logo-main{font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;letter-spacing:7px;text-transform:uppercase;background:linear-gradient(105deg,#7c5cef,#a584f8,#cdb9ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 12px rgba(124,92,239,.7))}
+.logo-sub{font-family:'Space Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:2.5px;color:rgba(205,185,255,.7);text-transform:uppercase}
+.navlinks{display:flex;align-items:center;gap:34px;list-style:none}
+.navlinks a{font-size:13px;font-weight:500;color:rgba(255,255,255,.55);text-decoration:none;letter-spacing:.3px;position:relative;padding-bottom:2px;transition:color .2s}
+.navlinks a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--p1),var(--p5));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.navlinks a:hover,.navlinks a.active{color:var(--white)}
+.navlinks a:hover::after,.navlinks a.active::after{transform:scaleX(1)}
+.navr{display:flex;align-items:center;gap:10px}
+.nghost{padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--white);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:none;text-decoration:none;transition:border-color .2s,background .2s}
+.nghost:hover{border-color:var(--p1);background:rgba(124,92,239,.1)}
+.ncta{padding:8px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--p2),var(--p3));color:var(--white);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:none;text-decoration:none;box-shadow:0 0 18px rgba(90,61,214,.5);transition:opacity .2s,transform .15s}
+.ncta:hover{opacity:.85;transform:translateY(-1px)}
+
+.page-hero{padding:140px 56px 60px;position:relative;z-index:2;text-align:center;overflow:hidden}
+.hero-glow{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 50% 60% at 50% 30%,rgba(90,61,214,.32) 0%,transparent 65%);pointer-events:none}
+.hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(124,92,239,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(124,92,239,.12) 1px,transparent 1px);background-size:68px 68px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);pointer-events:none}
+.hero-inner{position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p4);margin-bottom:20px}
+.eyedot{width:6px;height:6px;border-radius:50%;background:var(--p4);box-shadow:0 0 8px var(--p4);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.page-h1{font-family:'Outfit',sans-serif;font-size:clamp(36px,5vw,62px);font-weight:900;line-height:1.0;letter-spacing:-1.5px;margin-bottom:16px}
+.page-h1 em{font-style:normal;background:linear-gradient(120deg,var(--p1),var(--p4) 55%,var(--p5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-updated{font-size:13px;color:var(--muted);margin-top:8px}
+
+.legal-wrap{padding:60px 56px 100px;position:relative;z-index:2}
+.legal-inner{max-width:760px;margin:0 auto}
+.legal-toc{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:28px 32px;margin-bottom:56px;position:relative;overflow:hidden}
+.legal-toc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(124,92,239,.4),transparent)}
+.toc-title{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p4);margin-bottom:16px}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+.toc-list a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:6px}
+.toc-list a::before{content:'→';font-size:11px;color:var(--p4)}
+.toc-list a:hover{color:var(--white)}
+.highlight-box{background:rgba(124,92,239,.08);border:1px solid var(--border);border-radius:12px;padding:18px 22px;font-size:14px;color:var(--muted2);line-height:1.7;margin:18px 0}
+.highlight-box strong{color:var(--p4)}
+.highlight-box a{color:var(--p4);text-decoration:none}
+.legal-section{margin-bottom:48px;padding-bottom:48px;border-bottom:1px solid var(--border2)}
+.legal-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.ls-num{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--p4);margin-bottom:8px}
+.ls-title{font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;margin-bottom:16px;letter-spacing:-0.5px}
+.ls-body{font-size:15px;color:var(--muted2);line-height:1.85}
+.ls-body p{margin-bottom:14px}
+.ls-body p:last-child{margin-bottom:0}
+.ls-body ul{list-style:none;margin:14px 0}
+.ls-body ul li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--muted2);padding:6px 0;line-height:1.65}
+.ls-body ul li::before{content:'✦';color:var(--p4);font-size:11px;margin-top:3px;flex-shrink:0}
+.ls-body strong{color:var(--white);font-weight:600}
+.ls-body a{color:var(--p4);text-decoration:none;transition:color .2s}
+.ls-body a:hover{color:var(--p5)}
+
+footer{padding:44px 56px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;position:relative;z-index:2}
+.ftl{display:flex;flex-direction:column;gap:4px}
+.ftekon{font-family:'Outfit',sans-serif;font-size:26px;font-weight:900;letter-spacing:7px;text-transform:uppercase;background:linear-gradient(110deg,var(--p1),var(--p4),var(--p5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 10px rgba(124,92,239,.6))}
+.ftsub{font-family:'Space Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:2.5px;color:rgba(205,185,255,.7);text-transform:uppercase}
+.ftcopy{font-size:11px;color:rgba(255,255,255,.22);margin-top:5px}
+.ftlinks{display:flex;gap:26px;flex-wrap:wrap}
+.ftlinks a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.ftlinks a:hover{color:var(--white)}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rv.on{opacity:1;transform:translateY(0)}
+
+@media(max-width:860px){
+  body{cursor:auto}
+  #cdot,#cring{display:none}
+  nav{padding:0 20px;height:64px}
+  .navlinks{display:none}
+  .logo-main{font-size:22px;letter-spacing:5px}
+  .page-hero{padding:110px 20px 44px}
+  .page-h1{font-size:clamp(32px,9vw,48px)}
+  .legal-wrap{padding:36px 20px 72px}
+  .toc-list{grid-template-columns:1fr}
+  .legal-section{margin-bottom:36px;padding-bottom:36px}
+  .ls-title{font-size:20px}
+  footer{padding:32px 20px;flex-direction:column;align-items:flex-start;gap:24px}
+  .ftlinks{gap:16px}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="cdot"></div>
+<div id="cring"></div>
+<canvas id="cv"></canvas>
+<div id="ambient"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav id="nav">
+  <a href="index.html" class="logo"><span class="logo-main">EKON</span><span class="logo-sub">All-In-One CRM</span></a>
+  <ul class="navlinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plans.html">Pricing Plans</a></li>
+    <li><a href="privacy.html" class="active">Privacy Policy</a></li>
+    <li><a href="terms.html">Terms of Use</a></li>
+  </ul>
+  <div class="navr">
+    <a href="login.html" class="nghost">Login</a>
+    <a href="plans.html" class="ncta">Get Started</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="eyebrow"><div class="eyedot"></div>Legal</div>
+    <h1 class="page-h1">Privacy <em>Policy</em></h1>
+    <p class="page-updated">Last updated: January 1, 2026 · EKON Investments LLC</p>
+  </div>
+</section>
+
+<div class="legal-wrap">
+  <div class="legal-inner">
+    <div class="legal-toc rv">
+      <div class="toc-title">Contents</div>
+      <ul class="toc-list">
+        <li><a href="#info-collect">Information We Collect</a></li>
+        <li><a href="#how-use">How We Use Your Information</a></li>
+        <li><a href="#sharing">Information Sharing</a></li>
+        <li><a href="#sms">SMS & Communication Consent</a></li>
+        <li><a href="#cookies">Cookies & Tracking</a></li>
+        <li><a href="#security">Data Security</a></li>
+        <li><a href="#rights">Your Rights</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="highlight-box rv"><strong>The short version:</strong> EKON CRM (run by EKON Investments LLC) collects the information you give us to operate the platform and keep in touch. We don't sell your data — ever. We use it to run the service and make it better. Questions or concerns, hit us at <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a> and we'll get back to you within 48 hours.</div>
+
+    <div class="legal-section rv" id="info-collect">
+      <div class="ls-num">01</div><h2 class="ls-title">Information We Collect</h2>
+      <div class="ls-body">
+        <p>When you sign up, subscribe, or reach out to us, you hand us certain information directly. Here's what that includes:</p>
+        <ul>
+          <li>Name, email address, and phone number</li>
+          <li>Billing and payment information (processed securely via Stripe)</li>
+          <li>Business name and real estate operation details</li>
+          <li>Any content you upload or create inside the platform (contacts, pipelines, messages, notes)</li>
+          <li>Communications with our support team</li>
+        </ul>
+        <p>We also automatically collect certain technical information when you use the platform, including your IP address, browser type, device identifiers, pages visited, and feature usage. This helps us improve the product and diagnose issues.</p>
+      </div>
+    </div>
+
+    <div class="legal-section rv" id="how-use">
+      <div class="ls-num">02</div><h2 class="ls-title">How We Use Your Information</h2>
+      <div class="ls-body">
+        <p>The information we have is put to work running the platform — nothing more. Specifically:</p>
+        <ul>
+          <li>Provide, operate, and maintain the EKON CRM platform</li>
+          <li>Process payments and send billing-related communications</li>
+          <li>Send onboarding information, product updates, and support messages</li>
+          <li>Respond to your questions and support requests</li>
+          <li>Monitor platform performance and fix technical issues</li>
+          <li>Comply with legal obligations</li>
+          <li>Improve and develop new features based on how users interact with the platform</li>
+        </ul>
+        <p>We have no advertising program and no ad partners. Your data doesn't leave our ecosystem to be used for targeting.</p>
+      </div>
+    </div>
+
+    <div class="legal-section rv" id="sharing">
+      <div class="ls-num">03</div><h2 class="ls-title">Information Sharing</h2>
+      <div class="ls-body">
+        <p><strong>We do not sell, trade, or rent your personal information.</strong> We may share your information only in the following limited circumstances:</p>
+        <ul>
+          <li><strong>Service providers:</strong> Trusted vendors who help us operate the platform (e.g., Stripe for payments, GoHighLevel for CRM infrastructure, Twilio for SMS/calling). These providers are contractually obligated to protect your data.</li>
+          <li><strong>Legal requirements:</strong> If required by law, court order, or governmental authority.</li>
+          <li><strong>Business transfers:</strong> In connection with a merger, acquisition, or sale of assets.</li>
+          <li><strong>With your consent:</strong> In any other case where you have explicitly authorized us to share your information.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="legal-section rv" id="sms">
+      <div class="ls-num">04</div><h2 class="ls-title">SMS & Communication Consent</h2>
+      <div class="ls-body">
+        <p>By providing your phone number and using our platform, you consent to receiving SMS messages related to your account, service updates, and transactional notifications from EKON CRM.</p>
+        <p>If you use EKON CRM to send SMS messages to your own contacts, you are solely responsible for ensuring you have obtained proper TCPA-compliant consent from those recipients. EKON CRM provides tools to help you manage opt-outs and comply with carrier requirements — you are responsible for using them properly.</p>
+        <p>You may opt out of receiving SMS messages from us at any time by replying <strong>STOP</strong> to any message or contacting us at <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a>.</p>
+      </div>
+    </div>
+
+    <div class="legal-section rv" id="cookies">
+      <div class="ls-num">05</div><h2 class="ls-title">Cookies & Tracking</h2>
+      <div class="ls-body">
+        <p>We use cookies and similar tracking technologies to keep you logged in, remember your preferences, and understand how you use the platform. These are standard session and functional cookies — we do not use third-party advertising cookies.</p>
+        <p>You can control cookie settings through your browser. Disabling cookies may affect the functionality of certain parts of the platform.</p>
+      </div>
+    </div>
+
+    <div class="legal-section rv" id="security">
+      <div class="ls-num">06</div><h2 class="ls-title">Data Security</h2>
+      <div class="ls-body">
+        <p>We implement industry-standard technical and organizational measures to protect your personal information, including encryption in transit (TLS), secure access controls, and regular security monitoring.</p>
+        <p>However, no system is 100% secure. While we do our best to protect your data, we cannot guarantee absolute security. In the event of a data breach that affects your information, we will notify you as required by applicable law.</p>
+      </div>
+    </div>
+
+    <div class="legal-section rv" id="rights">
+      <div class="ls-num">07</div><h2 class="ls-title">Your Rights</h2>
+      <div class="ls-body">
+        <p>Depending on where you live, you may have certain rights regarding your personal information, including:</p>
+        <ul>
+          <li>The right to access the personal data we hold about you</li>
+          <li>The right to request correction of inaccurate information</li>
+          <li>The right to request deletion of your data</li>
+          <li>The right to opt out of certain data processing activities</li>
+        </ul>
+        <p>To exercise any of these rights, contact us at <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a>. We will respond within <strong>48 hours</strong>.</p>
+      </div>
+    </div>
+
+    <div class="legal-section rv" id="contact">
+      <div class="ls-num">08</div><h2 class="ls-title">Contact Us</h2>
+      <div class="ls-body">
+        <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please reach out:</p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a></li>
+          <li><strong>Business:</strong> EKON Investments LLC</li>
+          <li><strong>Effective Date:</strong> January 1, 2026</li>
+        </ul>
+        <p>We may update this Privacy Policy from time to time. We will notify you of significant changes via email or a prominent notice on the platform. Continued use of EKON CRM after updates constitutes your acceptance of the revised policy.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ftl"><span class="ftekon">EKON</span><span class="ftsub">All-In-One CRM</span><span class="ftcopy">© 2026 EKON Investments LLC. All rights reserved.</span></div>
+  <div class="ftlinks">
+    <a href="index.html">Home</a>
+    <a href="plans.html">Pricing Plans</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('prog').style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
+  document.getElementById('nav').classList.toggle('solid',scrollY>30);
+});
+const cdot=document.getElementById('cdot'),cring=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cdot.style.left=mx+'px';cdot.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;cring.style.left=rx+'px';cring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a').forEach(el=>{el.addEventListener('mouseenter',()=>{cring.style.width='46px';cring.style.height='46px';cring.style.borderColor='rgba(124,92,239,.9)'});el.addEventListener('mouseleave',()=>{cring.style.width='32px';cring.style.height='32px';cring.style.borderColor='rgba(124,92,239,.5)'})});
+const canvas=document.getElementById('cv'),ctx=canvas.getContext('2d');
+let W,H;
+const resize=()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight};
+resize();window.addEventListener('resize',resize);
+const pts=Array.from({length:70},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.4+.3,a:Math.random()*.3+.05}));
+(function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.
