@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – EKON CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:80px;}
+body{background:#000;color:#fff;font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+@media(max-width:768px){body{cursor:auto;}}
+
+/* CURSOR */
+#cur{width:8px;height:8px;background:#F5C842;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 10px #F5C842,0 0 20px rgba(245,200,66,.3);}
+#ring{width:26px;height:26px;border:1px solid rgba(212,160,23,.28);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
+@media(max-width:768px){#cur,#ring{display:none;}}
+
+/* SCROLL PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;z-index:9999;background:linear-gradient(90deg,#8B6410,#F5C842,#D4A017);width:0%;pointer-events:none;}
+
+/* STARFIELD */
+canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+#grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.038) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.038) 1px,transparent 1px);background-size:60px 60px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:600;height:66px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 48px;background:rgba(0,0,0,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(212,160,23,.1);transition:background .3s;}
+nav.solid{background:rgba(0,0,0,.97);}
+@media(max-width:900px){nav{grid-template-columns:1fr auto;padding:0 18px;}.nlinks{display:none !important;}}
+.nlo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.18em;text-decoration:none;display:flex;flex-direction:column;gap:3px;}
+.nlo-m{color:#fff;font-size:26px;letter-spacing:.14em;}.nlo-m span{color:#F5C842;text-shadow:0 0 22px rgba(245,200,66,.8),0 0 50px rgba(245,200,66,.35);}
+.nlo-s{font-size:9px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,160,23,.45);font-family:'DM Sans',sans-serif;}
+.nlinks{display:flex;align-items:center;justify-content:center;gap:32px;list-style:none;}
+.nlinks a{font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .2s;letter-spacing:.06em;position:relative;padding-bottom:2px;}
+.nlinks a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:#D4A017;transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.nlinks a:hover,.nlinks a.act{color:#D4A017;}
+.nlinks a:hover::after,.nlinks a.act::after{transform:scaleX(1);}
+.nr{display:flex;gap:8px;align-items:center;justify-content:flex-end;}
+.nbtn{display:inline-flex;align-items:center;background:linear-gradient(135deg,#A07010 0%,#F5C842 50%,#A07010 100%);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 20px;border-radius:3px;text-decoration:none;transition:background-position .4s,box-shadow .3s;box-shadow:0 0 18px rgba(212,160,23,.22);}
+.nbtn:hover{background-position:right center;box-shadow:0 0 32px rgba(212,160,23,.45);}
+.ng{display:inline-flex;align-items:center;border:1px solid rgba(212,160,23,.18);color:rgba(255,255,255,.35);font-size:11px;padding:8px 18px;border-radius:3px;text-decoration:none;transition:border-color .2s,color .2s;}
+.ng:hover{border-color:#D4A017;color:#D4A017;}
+
+/* DIVIDER */
+.gd{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,160,23,.12),transparent);}
+
+/* SECTIONS */
+.sec{max-width:1040px;margin:0 auto;padding:88px 48px;position:relative;z-index:2;}
+@media(max-width:768px){.sec{padding:64px 20px;}}
+.ctr{text-align:center;}
+.stag{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:#D4A017;margin-bottom:18px;font-family:'DM Sans',sans-serif;background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.2);border-radius:4px;padding:5px 14px;}
+.stag::before{content:'';width:5px;height:5px;border-radius:50%;background:#D4A017;box-shadow:0 0 8px rgba(212,160,23,.8);animation:blink 2s infinite;}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,66px);line-height:.9;letter-spacing:.03em;margin-bottom:16px;}
+.sh .w{color:#E8E8E8;}.sh .g{color:#F5C842;}
+.sp{font-size:15px;color:rgba(255,255,255,.42);line-height:1.9;font-weight:300;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#A07010 0%,#F5C842 50%,#A07010 100%);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:16px 42px;border-radius:3px;text-decoration:none;transition:background-position .4s,transform .2s,box-shadow .3s;box-shadow:0 0 28px rgba(212,160,23,.28),0 4px 18px rgba(0,0,0,.6);position:relative;overflow:hidden;}
+.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 38%,rgba(255,255,255,.12) 50%,transparent 62%);transform:translateX(-100%);transition:transform .5s;}
+.btn:hover{background-position:right center;transform:translateY(-2px);box-shadow:0 0 48px rgba(212,160,23,.52),0 8px 28px rgba(0,0,0,.7);}
+.btn:hover::after{transform:translateX(100%);}
+.btng{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(212,160,23,.2);color:rgba(255,255,255,.4);font-size:13px;padding:15px 32px;border-radius:3px;text-decoration:none;transition:border-color .3s,color .3s;}
+.btng:hover{border-color:#D4A017;color:#D4A017;}
+
+/* CARDS */
+.card{background:rgba(8,8,8,.9);border:1px solid rgba(255,255,255,.08);border-radius:12px;transition:border-color .3s,box-shadow .3s;}
+.card:hover{border-color:rgba(212,160,23,.28);box-shadow:0 0 22px rgba(212,160,23,.13),0 8px 32px rgba(0,0,0,.5);}
+.card-gold{background:rgba(212,160,23,.09);border:1px solid rgba(212,160,23,.24);border-radius:12px;position:relative;overflow:hidden;}
+.card-gold::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#D4A017,transparent);}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(16px);transition:opacity .65s,transform .65s;}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.07s;}.d2{transition-delay:.14s;}.d3{transition-delay:.21s;}.d4{transition-delay:.28s;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(212,160,23,.1);padding:32px 52px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;position:relative;z-index:2;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);}
+@media(max-width:768px){footer{padding:20px;flex-direction:column;text-align:center;align-items:center;}}
+.flo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.18em;color:rgba(255,255,255,.5);}
+.flo span{color:#F5C842;text-shadow:0 0 16px rgba(245,200,66,.5);}
+.fsub{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(212,160,23,.35);font-family:'DM Sans',sans-serif;margin-top:3px;}
+.fli{display:flex;gap:18px;flex-wrap:wrap;}
+.fli a{font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s;letter-spacing:.02em;}
+.fli a:hover{color:#D4A017;}
+.fco{font-size:10px;color:rgba(255,255,255,.1);}
+
+.dh{padding:110px 24px 52px;text-align:center;position:relative;overflow:hidden;}
+.dhgrid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(212,160,23,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,23,.018) 1px,transparent 1px);background-size:52px 52px;mask-image:radial-gradient(ellipse 70% 70% at 80% 30%,black 0%,transparent 100%);}
+.dh-in{position:relative;z-index:2;}
+.dtag{font-size:9px;font-weight:700;letter-spacing:.42em;text-transform:uppercase;color:#D4A017;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dtag::before,.dtag::after{content:'';width:12px;height:1px;background:#8B6410;}
+.dtitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,100px);line-height:.88;letter-spacing:.03em;margin-bottom:12px;color:#E8E8E8;}
+.dtitle .g{color:#F5C842;}
+.drule{width:38px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,160,23,.6),transparent);margin:12px auto;}
+.dmeta{font-size:12px;color:rgba(255,255,255,.2);letter-spacing:.04em;}
+.dmeta span{color:#D4A017;}
+.wrap{max-width:780px;margin:0 auto;padding:56px 52px 100px;position:relative;z-index:2;}
+@media(max-width:700px){.wrap{padding:40px 20px 80px;}}
+.toc{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:22px 26px;margin-bottom:42px;}
+.toc-lbl{font-size:9px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:#D4A017;margin-bottom:11px;display:block;}
+.toc-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:5px 18px;}
+@media(max-width:500px){.toc-list{grid-template-columns:1fr;}}
+.toc-list a{font-size:13px;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:5px;}
+.toc-list a::before{content:'→';font-size:10px;color:#D4A017;}
+.toc-list a:hover{color:#E8E8E8;}
+.intro{background:rgba(212,160,23,.09);border:1px solid rgba(212,160,23,.15);border-radius:8px;padding:16px 20px;margin-bottom:40px;font-size:13px;color:rgba(255,255,255,.4);line-height:1.75;}
+.intro strong{color:#D4A017;}
+.intro a{color:#D4A017;text-decoration:none;}
+.ls{margin-bottom:44px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.05);}
+.ls:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.ls-num{font-size:9px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:#D4A017;margin-bottom:7px;display:block;}
+.ls-t{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.04em;color:#E8E8E8;margin-bottom:13px;}
+.ls-b{font-size:14px;color:rgba(255,255,255,.3);line-height:1.88;}
+.ls-b p{margin-bottom:12px;}
+.ls-b p:last-child{margin-bottom:0;}
+.ls-b ul{list-style:none;margin:12px 0;padding:0;}
+.ls-b ul li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:rgba(255,255,255,.3);padding:5px 0;line-height:1.65;}
+.ls-b ul li::before{content:'✦';color:#D4A017;font-size:9px;margin-top:3px;flex-shrink:0;}
+.ls-b strong{color:#E8E8E8;font-weight:500;}
+.ls-b a{color:#D4A017;text-decoration:none;}
+.hbox{background:rgba(212,160,23,.09);border:1px solid rgba(212,160,23,.16);border-radius:7px;padding:14px 18px;margin:12px 0;}
+.hbox p{margin:0;font-size:13px;color:rgba(255,255,255,.4);line-height:1.72;}
+.wbox{background:rgba(255,80,80,.05);border:1px solid rgba(255,80,80,.15);border-radius:7px;padding:14px 18px;margin:12px 0;}
+.wbox p{margin:0;font-size:13px;color:rgba(255,160,160,.75);line-height:1.72;}
+.cbox{border:1px solid rgba(212,160,23,.18);border-radius:8px;padding:24px 28px;margin-top:40px;position:relative;overflow:hidden;}
+.cbox::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,160,23,.4),transparent);}
+.cbox-t{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.05em;color:#E8E8E8;margin-bottom:9px;}
+.cbox p{font-size:13px;color:rgba(255,255,255,.3);margin-bottom:4px;}
+.cbox a{color:#D4A017;text-decoration:none;}
+
+/* LOGO */
+.nlo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.18em;text-decoration:none;display:flex;flex-direction:column;gap:3px;}
+.nlo-m{color:rgba(255,255,255,.85);}.nlo-m span{color:#F5C842;text-shadow:0 0 18px rgba(245,200,66,.7),0 0 40px rgba(245,200,66,.3);}
+.nlo-s{font-size:8px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.2);font-family:'DM Sans',sans-serif;}
+
+/* TIMELINE STEP GLOW */
+.tstep-num{box-shadow:0 0 18px rgba(212,160,23,.22),0 0 40px rgba(212,160,23,.08);}
+.tstep-num::after{content:'';position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.12) 0%,transparent 70%);}
+.tstep:hover .tstep-num{box-shadow:0 0 32px rgba(212,160,23,.55),0 0 70px rgba(212,160,23,.2);border-color:rgba(212,160,23,.6);transition:box-shadow .3s,border-color .3s;}
+
+/* STAT CARDS GLOW */
+.stat{box-shadow:0 0 24px rgba(212,160,23,.1),inset 0 1px 0 rgba(212,160,23,.08);}
+.stat:hover{box-shadow:0 0 44px rgba(212,160,23,.28),inset 0 1px 0 rgba(212,160,23,.14);}
+
+/* FEATURE CARDS GLOW */
+.fc{transition:box-shadow .3s,border-color .3s;}
+.fc:hover{box-shadow:0 0 36px rgba(212,160,23,.2),0 8px 32px rgba(0,0,0,.6);border-color:rgba(212,160,23,.35);}
+
+/* PLAN CARDS GLOW */
+.plan-hot{box-shadow:0 0 60px rgba(212,160,23,.18),0 0 120px rgba(212,160,23,.07);}
+.plan-base:hover{box-shadow:0 0 40px rgba(212,160,23,.14);}
+
+/* SECTION HEADING GLOW — gold text shimmer */
+.sh .g{text-shadow:0 0 40px rgba(245,200,66,.45),0 0 80px rgba(245,200,66,.15);}
+
+/* TIMELINE connector line glow */
+.timeline::before{background:linear-gradient(90deg,transparent,rgba(212,160,23,.6),rgba(212,160,23,.6),transparent);box-shadow:0 0 12px rgba(212,160,23,.35);}
+
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="cur"></div><div id="ring"></div>
+<canvas id="starfield"></canvas>
+<div id="grid-bg"></div>
+<nav>
+  <a href="index.html" class="nlo"><div class="nlo-m">EKON <span>CRM</span></div><div class="nlo-s">Wholesale Real Estate Platform</div></a>
+  <ul class="nlinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plans.html">Pricing</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+  </ul>
+  <div class="nr">
+    <a href="#" class="ng">Login</a>
+    <a href="plans.html" class="nbtn">Get Started</a>
+  </div>
+</nav>
+
+<div class="dh"><div class="dhgrid"></div><div class="dh-in">
+  <p class="dtag">Legal</p>
+  <h1 class="dtitle">Privacy<br><span class="g">Policy</span></h1>
+  <div class="drule"></div>
+  <p class="dmeta">Last updated: <span>January 1, 2026</span> &nbsp;·&nbsp; EKON Investments LLC &nbsp;·&nbsp; ekoncrm.com</p>
+</div></div>
+<div class="gd"></div>
+<div class="wrap">
+  <div class="toc r"><span class="toc-lbl">Contents</span>
+    <ul class="toc-list">
+      <li><a href="#s1">Information We Collect</a></li><li><a href="#s2">How We Use It</a></li>
+      <li><a href="#s3">Information Sharing</a></li><li><a href="#s4">SMS & Consent</a></li>
+      <li><a href="#s5">Cookies</a></li><li><a href="#s6">Data Security</a></li>
+      <li><a href="#s7">Your Rights</a></li><li><a href="#s8">Changes</a></li>
+    </ul>
+  </div>
+  <div class="intro r">The short version: EKON CRM collects the information you give us to operate the platform. <strong>We don't sell your data — ever.</strong> Questions? <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a></div>
+  <div class="ls r" id="s1"><span class="ls-num">01</span><div class="ls-t">Information We Collect</div><div class="ls-b"><ul><li>Name, email address, and phone number</li><li>Billing and payment information (processed via Stripe)</li><li>Business name and real estate operation details</li><li>Content you upload or create inside the platform</li><li>Communications with our support team</li></ul><p>We also collect technical information including IP address, browser type, device identifiers, and feature usage.</p></div></div>
+  <div class="ls r" id="s2"><span class="ls-num">02</span><div class="ls-t">How We Use Your Information</div><div class="ls-b"><ul><li>Provide, operate, and maintain the EKON CRM platform</li><li>Process payments and send billing communications</li><li>Send onboarding information, updates, and support messages</li><li>Monitor platform performance and fix technical issues</li><li>Improve and develop new features</li><li>Comply with legal obligations</li></ul><p>We have no advertising program. Your data doesn't leave our ecosystem for targeting purposes.</p></div></div>
+  <div class="ls r" id="s3"><span class="ls-num">03</span><div class="ls-t">Information Sharing</div><div class="ls-b"><p>We do not sell, trade, or rent your personal information. We may share it only with:</p><ul><li><strong>Service providers:</strong> Stripe (payments), GoHighLevel (CRM), Twilio (SMS/calling) — all contractually required to protect your data</li><li><strong>Legal requirements:</strong> If required by law or court order</li><li><strong>Business transfers:</strong> In connection with a merger or acquisition</li><li><strong>With your consent:</strong> In any other case you've authorized</li></ul></div></div>
+  <div class="ls r" id="s4"><span class="ls-num">04</span><div class="ls-t">SMS & Communication Consent</div><div class="ls-b"><p>By providing your phone number, you consent to receiving SMS messages related to your account and service updates. If you use EKON CRM to send SMS to your own contacts, you are solely responsible for obtaining proper TCPA-compliant consent from those recipients.</p></div></div>
+  <div class="ls r" id="s5"><span class="ls-num">05</span><div class="ls-t">Cookies & Tracking</div><div class="ls-b"><p>We use cookies to keep you logged in, remember preferences, and understand platform usage. You can control cookies through your browser settings, though this may affect platform functionality.</p></div></div>
+  <div class="ls r" id="s6"><span class="ls-num">06</span><div class="ls-t">Data Security</div><div class="ls-b"><p>We implement industry-standard security measures including encryption in transit and at rest, access controls, and regular security reviews. No system is 100% secure — we will notify you of any breach affecting your data as required by law.</p></div></div>
+  <div class="ls r" id="s7"><span class="ls-num">07</span><div class="ls-t">Your Rights</div><div class="ls-b"><ul><li>Access the personal information we hold about you</li><li>Request correction of inaccurate data</li><li>Request deletion of your personal information</li><li>Opt out of marketing communications at any time</li><li>Request a portable copy of your data</li></ul><p>Contact <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a> to exercise any of these rights.</p></div></div>
+  <div class="ls r" id="s8"><span class="ls-num">08</span><div class="ls-t">Changes to This Policy</div><div class="ls-b"><p>We may update this Privacy Policy from time to time. Continued use of the platform after changes constitutes acceptance.</p></div></div>
+  <div class="cbox r"><div class="cbox-t">Questions?</div><p>EKON Investments LLC</p><p>Website: <a href="https://ekoncrm.com">ekoncrm.com</a></p><p>Email: <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a></p><p>Response time: within 48 hours</p></div>
+</div>
+
+<footer>
+  <div><div class="flo">EKON <span>CRM</span></div><div class="fsub">Powered by GoHighLevel · EKON Investments LLC</div></div>
+  <div class="fli">
+    <a href="index.html">Home</a><a href="plans.html">Pricing</a>
+    <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a>
+    <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a>
+  </div>
+  <p class="fco">© 2026 EKON Investments LLC. All rights reserved.</p>
+</footer>
+<script>
+// scroll progress
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight)*100;prog.style.width=pct+'%';});
+// nav solid
+const nav=document.querySelector('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>60);});
+// cursor
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function t(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+document.querySelectorAll('a,button').forEach(a=>{a.addEventListener('mouseenter',()=>{cur.style.width='14px';cur.style.height='14px';ring.style.width='36px';ring.style.height='36px';});a.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='26px';ring.style.height='26px';});});
+// Dots
+const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');
+let dots=[],W,H;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;initDots();}
+function initDots(){dots=[];for(let i=0;i<140;i++)dots.push({x:Math.random()*W,y:Math.random()*H,r:.4+Math.random()*1.1,phase:Math.random()*Math.PI*2,speed:.002+Math.random()*.007,base:.1+Math.random()*.4});}
+function drawFrame(){ctx.clearRect(0,0,W,H);dots.forEach(d=>{d.phase+=d.speed;const a=d.base*(.35+.65*Math.sin(d.phase));ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.fill();});requestAnimationFrame(drawFrame);}
+window.addEventListener('resize',resize);resize();requestAnimationFrame(drawFrame);
+
+// counter animation
+const co=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,t=+el.dataset.t,s=el.dataset.s||'',p=el.dataset.p||'';let c=0;const step=t/60;const iv=setInterval(()=>{c=Math.min(c+step,t);el.textContent=p+Math.floor(c).toLocaleString()+s;if(c>=t)clearInterval(iv);},16);co.unobserve(el);});},{threshold:.5});
+document.querySelectorAll('[data-t]').forEach(el=>co.observe(el));
+// reveal
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.07});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+// activity feed ticker
+const feed=document.getElementById('afeed');
+if(feed){const items=feed.querySelectorAll('.af-item');let cur2=0;setInterval(()=>{items.forEach(i=>i.classList.remove('af-active'));cur2=(cur2+1)%items.length;items[cur2].classList.add('af-active');},2800);}
+</script>
+</body>
+</html>
