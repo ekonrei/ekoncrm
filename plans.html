@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing – EKON CRM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#000;color:#fff;font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+@media(max-width:768px){body{cursor:auto;}}
+#cur,#ring{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur{width:8px;height:8px;background:#F5C842;border-radius:50%;box-shadow:0 0 10px #F5C842;}
+#ring{width:26px;height:26px;border:1px solid rgba(212,160,23,.28);border-radius:50%;z-index:9998;transition:width .2s,height .2s;}
+@media(max-width:768px){#cur,#ring{display:none;}}
+canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+#grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:60px 60px;}
+#prog{position:fixed;top:0;left:0;height:2px;z-index:9999;background:linear-gradient(90deg,#8B6410,#F5C842,#D4A017);width:0%;pointer-events:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:600;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(0,0,0,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,160,23,.1);transition:background .3s;}
+nav.solid{background:rgba(0,0,0,.98);}
+.nlo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.16em;text-decoration:none;display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+.nlo-m{color:#fff;}.nlo-m span{color:#F5C842;text-shadow:0 0 18px rgba(245,200,66,.7);}
+.nlo-s{font-size:8px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(212,160,23,.4);font-family:'DM Sans',sans-serif;}
+.nlinks{display:flex;align-items:center;justify-content:center;gap:28px;list-style:none;position:absolute;left:50%;transform:translateX(-50%);}
+.nlinks a{font-size:12px;color:rgba(255,255,255,.42);text-decoration:none;transition:color .2s;letter-spacing:.05em;position:relative;padding-bottom:2px;white-space:nowrap;}
+.nlinks a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:#D4A017;transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.nlinks a:hover,.nlinks a.act{color:#D4A017;}
+.nlinks a:hover::after,.nlinks a.act::after{transform:scaleX(1);}
+.nr{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.nbtn{display:inline-flex;align-items:center;background:linear-gradient(135deg,#A07010,#F5C842 50%,#A07010);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 18px;border-radius:3px;text-decoration:none;transition:background-position .4s,box-shadow .3s;box-shadow:0 0 18px rgba(212,160,23,.22);white-space:nowrap;}
+.nbtn:hover{background-position:right center;box-shadow:0 0 32px rgba(212,160,23,.5);}
+.ng{display:inline-flex;align-items:center;border:1px solid rgba(212,160,23,.2);color:rgba(255,255,255,.38);font-size:11px;padding:8px 16px;border-radius:3px;text-decoration:none;transition:border-color .2s,color .2s;white-space:nowrap;}
+.ng:hover{border-color:#D4A017;color:#D4A017;}
+@media(max-width:900px){.nlinks{display:none;}nav{padding:0 20px;}}
+@media(max-width:480px){.ng{display:none;}.nbtn{font-size:10px;padding:8px 14px;}}
+
+/* SHARED */
+.gd{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,160,23,.12),transparent);}
+.sec{max-width:1040px;margin:0 auto;padding:88px 48px;position:relative;z-index:2;}
+.ctr{text-align:center;}
+.r{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s;}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.07s;}.d2{transition-delay:.14s;}.d3{transition-delay:.21s;}.d4{transition-delay:.28s;}
+.stag{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:#D4A017;margin-bottom:18px;background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.2);border-radius:4px;padding:5px 14px;}
+.stag::before{content:'';width:5px;height:5px;border-radius:50%;background:#D4A017;box-shadow:0 0 8px rgba(212,160,23,.8);animation:bpulse 2s infinite;}
+@keyframes bpulse{0%,100%{opacity:1;}50%{opacity:.2;}}
+.sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5.5vw,64px);line-height:.92;letter-spacing:.03em;margin-bottom:16px;}
+.sh .w{color:#E8E8E8;}.sh .g{color:#F5C842;text-shadow:0 0 36px rgba(245,200,66,.28);}
+.sp{font-size:15px;color:rgba(255,255,255,.42);line-height:1.9;font-weight:300;}
+.card{background:rgba(8,8,8,.92);border:1px solid rgba(255,255,255,.08);border-radius:12px;transition:border-color .3s,box-shadow .3s;}
+.card:hover{border-color:rgba(212,160,23,.3);box-shadow:0 0 22px rgba(212,160,23,.1);}
+.y{color:#F5C842;}.n{color:rgba(255,255,255,.2);}
+@media(max-width:768px){.sec{padding:64px 20px;}}
+@media(max-width:480px){.sec{padding:52px 16px;}}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(212,160,23,.1);padding:30px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;position:relative;z-index:2;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);}
+.flo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.18em;color:rgba(255,255,255,.5);}
+.flo span{color:#F5C842;text-shadow:0 0 14px rgba(245,200,66,.5);}
+.fsub{font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(212,160,23,.35);font-family:'DM Sans',sans-serif;margin-top:2px;}
+.fli{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.fli a{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.fli a:hover{color:#D4A017;}
+.fco{font-size:10px;color:rgba(255,255,255,.15);}
+@media(max-width:768px){footer{padding:22px 20px;flex-direction:column;text-align:center;align-items:center;gap:12px;}}
+@media(max-width:480px){footer{padding:20px 16px;}.fli{flex-direction:column;gap:8px;align-items:center;}.fli a{font-size:13px;}}
+
+/* PRICING HERO */
+.ph{padding:120px 24px 60px;text-align:center;position:relative;overflow:hidden;z-index:2;}
+.phgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,160,23,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,23,.018) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 60% 60% at 50% 40%,black 0%,transparent 100%);}
+.ph-in{position:relative;z-index:2;}
+.phtitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,8vw,90px);line-height:.88;letter-spacing:.02em;margin-bottom:14px;}
+.phtitle .w{color:#E8E8E8;}.phtitle .g{color:#F5C842;}
+.phsub{font-size:15px;color:rgba(255,255,255,.42);line-height:1.75;max-width:500px;margin:0 auto 8px;}
+.phnote{font-size:11px;color:rgba(255,255,255,.22);}
+@keyframes fu{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+@media(max-width:480px){.ph{padding:100px 16px 48px;}}
+
+/* PLAN GRID */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:0;}
+.plan{border-radius:14px;padding:40px 34px;position:relative;overflow:hidden;transition:box-shadow .3s;}
+.plan-base{background:rgba(10,10,10,.95);border:1px solid rgba(255,255,255,.12);transition:border-color .3s,box-shadow .3s;}
+.plan-base:hover{border-color:rgba(212,160,23,.3);box-shadow:0 0 36px rgba(212,160,23,.12);}
+.plan-hot{background:rgba(14,10,0,.97);border:1px solid rgba(212,160,23,.38);box-shadow:0 0 60px rgba(212,160,23,.15);}
+.plan-hot::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#F5C842,transparent);}
+.badge{display:inline-block;background:linear-gradient(135deg,#A07010,#F5C842);color:#000;font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 12px;border-radius:100px;margin-bottom:12px;}
+.pnum{font-size:9px;font-weight:600;letter-spacing:.38em;text-transform:uppercase;color:rgba(212,160,23,.55);margin-bottom:10px;display:block;}
+.pname{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:#fff;margin-bottom:4px;}
+.plan-hot .pname{color:#F5C842;text-shadow:0 0 20px rgba(245,200,66,.45);}
+.pprice{font-family:'Bebas Neue',sans-serif;font-size:60px;letter-spacing:.02em;line-height:1;color:#fff;margin-bottom:4px;}
+.plan-hot .pprice{background:linear-gradient(135deg,#fff 20%,#F5C842 60%,#D4A017 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.pprice sup{font-size:22px;vertical-align:super;}
+.pprice sub{font-size:14px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-weight:300;-webkit-text-fill-color:rgba(255,255,255,.3);}
+.psetup{font-size:12px;color:rgba(255,255,255,.48);margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08);}
+.psetup span{color:#D4A017;}
+.plist{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.plist li{font-size:14px;color:rgba(255,255,255,.78);display:flex;align-items:flex-start;gap:10px;line-height:1.5;}
+.plist li::before{content:'✦';color:#D4A017;font-size:9px;flex-shrink:0;margin-top:3px;}
+.plist .no{color:rgba(255,255,255,.3);}
+.plist .no::before{content:'—';color:rgba(255,255,255,.22);}
+.pbtn{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#A07010 0%,#F5C842 50%,#A07010 100%);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:14px;border-radius:3px;text-decoration:none;transition:background-position .4s,transform .2s,box-shadow .3s;box-shadow:0 0 20px rgba(212,160,23,.22);width:100%;}
+.pbtn:hover{background-position:right center;transform:translateY(-1px);box-shadow:0 0 40px rgba(212,160,23,.5);}
+.pbtng{display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,160,23,.2);color:rgba(255,255,255,.4);font-size:12px;padding:13px;border-radius:3px;text-decoration:none;transition:border-color .3s,color .3s;width:100%;}
+.pbtng:hover{border-color:#D4A017;color:#D4A017;}
+@media(max-width:680px){.pgrid{grid-template-columns:1fr;}.plan{padding:32px 22px;}.pprice{font-size:48px;}}
+@media(max-width:480px){.plan{padding:28px 18px;}.plist li{font-size:13px;}}
+
+/* USAGE */
+.ugrid2{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px;}
+.ug2{padding:26px;text-align:center;}
+.ug2-p{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#F5C842;letter-spacing:.04em;text-shadow:0 0 20px rgba(245,200,66,.35);}
+.ug2-l{font-size:12px;color:rgba(255,255,255,.35);margin-top:5px;line-height:1.55;}
+@media(max-width:560px){.ugrid2{grid-template-columns:1fr;}}
+
+/* COMPARE */
+.compare-outer{margin-top:28px;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;background:rgba(8,8,8,.94);}
+.compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.compare{width:100%;border-collapse:collapse;min-width:480px;}
+.compare thead tr{background:rgba(212,160,23,.04);border-bottom:1px solid rgba(212,160,23,.15);}
+.compare th{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:18px 20px;text-align:center;color:#E8E8E8;}
+.compare th:first-child{text-align:left;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);}
+.compare .cg{color:#F5C842;text-shadow:0 0 18px rgba(245,200,66,.45);}
+.compare td{padding:12px 20px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04);text-align:center;vertical-align:middle;}
+.compare td:first-child{text-align:left;color:rgba(255,255,255,.6);}
+.compare tr:last-child td{border-bottom:none;}
+.compare tr:hover td{background:rgba(255,255,255,.012);}
+.compare .cc{text-align:center;}
+
+/* ── HAMBURGER & SIDEBAR ── */
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;z-index:700;background:none;border:none;}
+.hbg span{display:block;width:22px;height:2px;background:#D4A017;border-radius:2px;transition:transform .3s,opacity .3s;}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hbg.open span:nth-child(2){opacity:0;}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:900px){.hbg{display:flex;}}
+.sidebar{position:fixed;top:0;right:-280px;width:260px;height:100vh;background:#0a0a0a;border-left:1px solid rgba(212,160,23,.15);z-index:650;transition:right .32s cubic-bezier(.22,1,.36,1);padding:80px 28px 40px;display:flex;flex-direction:column;gap:4px;}
+.sidebar.open{right:0;}
+.sidebar a{font-size:14px;font-weight:500;color:rgba(255,255,255,.45);text-decoration:none;padding:13px 16px;border-radius:6px;transition:background .2s,color .2s;letter-spacing:.03em;font-family:'DM Sans',sans-serif;}
+.sidebar a:hover,.sidebar a.act{background:rgba(212,160,23,.08);color:#D4A017;}
+.sidebar-div{height:1px;background:rgba(255,255,255,.06);margin:10px 0;}
+.sidebar-cta{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#A07010 0%,#F5C842 50%,#A07010 100%);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px;border-radius:3px;text-decoration:none;margin-top:auto;box-shadow:0 0 20px rgba(212,160,23,.22);}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:640;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px);}
+.overlay.open{opacity:1;pointer-events:all;}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="cur"></div><div id="ring"></div>
+<canvas id="starfield"></canvas>
+<div id="grid"></div>
+
+
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <a href="index.html">Home</a>
+  <a href="plans.html">Pricing</a>
+  <a href="affiliate.html">Affiliates</a>
+  <div class="sidebar-div"></div>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Use</a>
+  <div class="sidebar-div"></div>
+  <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" class="sidebar-cta">Book a Call →</a>
+</div>
+<nav>
+  <a href="index.html" class="nlo"><div class="nlo-m">EKON <span>CRM</span></div><div class="nlo-s">Wholesale Real Estate Platform</div></a>
+  <ul class="nlinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plans.html" class="act">Pricing</a></li>
+    <li><a href="affiliate.html">Affiliates</a></li><li><a href="affiliate.html">Affiliates</a><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+  </ul>
+  <div class="nr">
+    <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" class="nbtn">Book a Call</a>
+  </div>
+
+  <button class="hbg" id="hbg" aria-label="Menu" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="ph">
+  <div class="phgrid"></div>
+  <div class="ph-in">
+    <p class="stag r" style="justify-content:center;">Pricing</p>
+    <h1 class="phtitle r"><span class="w">Two Plans.</span><span class="g">One Done-For-You System.</span></h1>
+    <p class="phsub r">Pick how much you want us to do for you. Both plans include full GHL access, AI bots, multi-channel outreach, and the complete EKON Software Suite.</p>
+    <p class="phnote r">No setup fees · No long-term contracts · Usage billed at cost, no markup</p>
+  </div>
+</div>
+
+<div class="gd"></div>
+
+<section class="sec">
+
+  <!-- BILLING TOGGLE -->
+  <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:36px;">
+    <span id="lbl-mo" style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F5C842;letter-spacing:.04em;">Monthly</span>
+    <div id="toggle" onclick="switchBilling()" style="width:48px;height:26px;background:rgba(212,160,23,.15);border:1px solid rgba(212,160,23,.3);border-radius:100px;cursor:pointer;position:relative;transition:background .3s;">
+      <div id="toggle-dot" style="width:20px;height:20px;background:#D4A017;border-radius:50%;position:absolute;top:2px;left:2px;transition:left .3s;box-shadow:0 0 8px rgba(212,160,23,.5);"></div>
+    </div>
+    <span id="lbl-yr" style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.04em;">Yearly <span style="background:rgba(212,160,23,.15);border:1px solid rgba(212,160,23,.25);color:#D4A017;font-size:10px;padding:2px 8px;border-radius:100px;margin-left:4px;font-weight:700;">Save 15%</span></span>
+  </div>
+
+  <div class="pgrid">
+    <div class="plan plan-base r">
+      <span class="pnum">Plan 01</span>
+      <!-- DISCOUNT BADGE -->
+      <div style="display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;">
+        <span style="font-size:12px;color:rgba(255,255,255,.3);text-decoration:line-through;font-family:'DM Sans',sans-serif;" id="basic-orig-mo">$147/mo</span>
+        <span style="background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:rgba(255,100,100,.9);font-size:10px;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:100px;font-family:'DM Sans',sans-serif;" id="basic-disc-mo">34% OFF</span>
+      </div>
+      <div class="pname">EKON CRM Basic</div>
+      <div class="pprice"><sup>$</sup><span id="basic-price">97</span><sub>/mo</sub></div>
+      <div class="psetup" id="basic-setup">Done-for-you setup · A2P handled · No setup fee</div>
+      <ul class="plist">
+        <li>Full CRM Access</li>
+        <li>Pipelines & Funnels</li>
+        <li>SMS, Email & Multi-Channel Marketing</li>
+        <li>Calendar Booking</li>
+        <li>Workflow Builder</li>
+        <li>AI Conversation Bot</li>
+        <li>Prebuilt Automation Templates</li>
+        <li>Seller Lead Website Built for You</li>
+        <li>A2P Registered & Numbers Ready</li>
+        <li>1-on-1 Onboarding Call</li>
+        <li>Launch-Ready in 48–72 Hours</li>
+        <li class="no">EKON Software Suite</li>
+        <li class="no">KPI Tracker Suite (5 tools)</li>
+        <li class="no">Priority Support</li>
+      </ul>
+      <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" class="pbtng">Get Started →</a>
+    </div>
+    <div class="plan plan-hot r d1">
+      <div class="badge">Best Value</div>
+      <!-- DISCOUNT BADGE -->
+      <div style="display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;">
+        <span style="font-size:12px;color:rgba(255,255,255,.3);text-decoration:line-through;font-family:'DM Sans',sans-serif;" id="pro-orig-mo">$197/mo</span>
+        <span style="background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:rgba(255,100,100,.9);font-size:10px;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:100px;font-family:'DM Sans',sans-serif;" id="pro-disc-mo">40% OFF</span>
+      </div>
+      <span class="pnum">Plan 02</span>
+      <div class="pname">EKON CRM Pro</div>
+      <div class="pprice"><sup>$</sup><span id="pro-price">119</span><sub>/mo</sub></div>
+      <div class="psetup" id="pro-setup">Everything in Basic · Full software suite included</div>
+      <ul class="plist">
+        <li>Everything in Basic, plus:</li>
+        <li>EKON KPI Tracker</li>
+        <li>Revenue & Profit Tracker</li>
+        <li>Deal & Expenses Tracker</li>
+        <li>Goal Tracker</li>
+        <li>Deal Velocity Tracker</li>
+        <li>Full Reporting Dashboard</li>
+        <li>Priority Email & Phone Support</li>
+      </ul>
+      <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" class="pbtn">Get Started →</a>
+    </div>
+  </div>
+</section>
+
+<div class="gd"></div>
+
+<section class="sec ctr">
+  <p class="stag r" style="justify-content:center;">Usage Costs</p>
+  <h2 class="sh r"><span class="w">Only Pay for</span><br><span class="g">What You Send.</span></h2>
+  <p class="sp r" style="max-width:440px;margin:0 auto;">Your plan covers platform access. Messaging and calls are billed at cost — no markup.</p>
+  <div class="ugrid2">
+    <div class="ug2 card r d1"><div style="font-size:22px;margin-bottom:10px;">💬</div><div class="ug2-p">$0.0083</div><div class="ug2-l">per SMS segment<br>Less than a penny per text.</div></div>
+    <div class="ug2 card r d2"><div style="font-size:22px;margin-bottom:10px;">📞</div><div class="ug2-p">$0.0166</div><div class="ug2-l">per minute calling<br>Inbound and outbound.</div></div>
+    <div class="ug2 card r d3"><div style="font-size:22px;margin-bottom:10px;">✉️</div><div class="ug2-p">Free</div><div class="ug2-l">email sending<br>Included in your plan.</div></div>
+  </div>
+  <p style="font-size:11px;color:rgba(255,255,255,.22);margin-top:16px;" class="r">All rates pass-through at cost. Set usage limits inside the platform to avoid surprises.</p>
+</section>
+
+<div class="gd"></div>
+
+<section class="sec">
+  <p class="stag r">Full Comparison</p>
+  <h2 class="sh r"><span class="w">Everything</span><br><span class="g">Side by Side.</span></h2>
+  <div class="compare-outer r">
+    <div class="compare-scroll">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Basic — $97/mo</th>
+            <th class="cg">Pro — $119/mo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Full CRM Access</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>Pipelines & Funnels</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>SMS / Email Marketing</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>AI Conversation Bot</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>Workflow Builder</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>Prebuilt Templates</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>Done-For-You Setup</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>A2P Registration Handled</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>1-on-1 Onboarding Call</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>Seller Lead Website Built</td><td class="cc y">✦</td><td class="cc y">✦</td></tr>
+          <tr><td>Launch Timeline</td><td class="y">48–72 hours</td><td class="y">48–72 hours</td></tr>
+          <tr><td>EKON KPI Tracker</td><td class="cc n">—</td><td class="cc y">✦</td></tr>
+          <tr><td>Revenue & Profit Tracker</td><td class="cc n">—</td><td class="cc y">✦</td></tr>
+          <tr><td>Deal & Expenses Tracker</td><td class="cc n">—</td><td class="cc y">✦</td></tr>
+          <tr><td>Goal Tracker</td><td class="cc n">—</td><td class="cc y">✦</td></tr>
+          <tr><td>Deal Velocity Tracker</td><td class="cc n">—</td><td class="cc y">✦</td></tr>
+          <tr><td>Full Reporting Dashboard</td><td class="cc n">—</td><td class="cc y">✦</td></tr>
+          <tr><td>Priority Support</td><td class="cc n">—</td><td class="cc y">✦</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div><div class="flo">EKON <span>CRM</span></div><div class="fsub">Powered by GoHighLevel · EKON Investments LLC</div></div>
+  <div class="fli"><a href="index.html">Home</a><a href="plans.html">Pricing</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a></div>
+  <p class="fco">© 2026 EKON Investments LLC. All rights reserved.</p>
+</footer>
+<script>
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{prog.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
+const nav=document.querySelector('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>60);},{passive:true});
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function t(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.width='13px';cur.style.height='13px';ring.style.width='34px';ring.style.height='34px';});el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='26px';ring.style.height='26px';});});
+const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');
+let dots=[],W,H;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;dots=[];for(let i=0;i<130;i++)dots.push({x:Math.random()*W,y:Math.random()*H,r:.3+Math.random()*1.0,phase:Math.random()*Math.PI*2,speed:.002+Math.random()*.006,base:.08+Math.random()*.38});}
+function draw(){ctx.clearRect(0,0,W,H);dots.forEach(d=>{d.phase+=d.speed;const a=d.base*(.3+.7*Math.sin(d.phase));ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.fill();});requestAnimationFrame(draw);}
+window.addEventListener('resize',resize,{passive:true});resize();requestAnimationFrame(draw);
+// billing toggle
+let yearly = false;
+function switchBilling(){
+  yearly = !yearly;
+  const dot = document.getElementById('toggle-dot');
+  const lblMo = document.getElementById('lbl-mo');
+  const lblYr = document.getElementById('lbl-yr');
+  dot.style.left = yearly ? '26px' : '2px';
+  lblMo.style.color = yearly ? 'rgba(255,255,255,.35)' : '#F5C842';
+  lblYr.style.color = yearly ? '#F5C842' : 'rgba(255,255,255,.35)';
+
+  // Basic: $97/mo → $83/mo yearly ($997/yr)
+  // Pro:   $119/mo → $101/mo yearly ($1,213/yr)
+  if(yearly){
+    document.getElementById('basic-price').textContent = '83';
+    document.getElementById('basic-setup').textContent = 'Billed $997/yr · Save $167 · A2P handled';
+    document.getElementById('basic-orig-mo').textContent = '$97/mo';
+    document.getElementById('basic-disc-mo').textContent = 'SAVE $167';
+    document.getElementById('pro-price').textContent = '101';
+    document.getElementById('pro-setup').textContent = 'Billed $1,213/yr · Save $215 · Full suite included';
+    document.getElementById('pro-orig-mo').textContent = '$119/mo';
+    document.getElementById('pro-disc-mo').textContent = 'SAVE $215';
+  } else {
+    document.getElementById('basic-price').textContent = '97';
+    document.getElementById('basic-setup').textContent = 'Done-for-you setup · A2P handled · No setup fee';
+    document.getElementById('basic-orig-mo').textContent = '$147/mo';
+    document.getElementById('basic-disc-mo').textContent = '34% OFF';
+    document.getElementById('pro-price').textContent = '119';
+    document.getElementById('pro-setup').textContent = 'Everything in Basic · Full software suite included';
+    document.getElementById('pro-orig-mo').textContent = '$197/mo';
+    document.getElementById('pro-disc-mo').textContent = '40% OFF';
+  }
+}
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.06});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('overlay');
+  const hb=document.getElementById('hbg');
+  sb.classList.toggle('open');
+  ov.classList.toggle('open');
+  hb.classList.toggle('open');
+  document.body.style.overflow=sb.classList.contains('open')?'hidden':'';
+}
+
+</script>
+</body>
+</html>
