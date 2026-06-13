@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing – EKON CRM | All-In-One Wholesale CRM</title>
+<meta name="description" content="Two plans. Standard $119/mo + $250 setup (bring your own LLC + EIN). Hosted $150/mo + $250 setup — rent an A2P-approved account, no LLC needed. Done-for-you, no contracts.">
+<meta property="og:title" content="Pricing – EKON CRM">
+<meta property="og:description" content="Two plans built for wholesalers. Bring your own LLC or rent a ready-to-go A2P account. Full CRM, automated follow-up & lead nurturing, done for you from day one. No contracts.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#000;color:#fff;font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+@media(max-width:768px){body{cursor:auto;}}
+
+/* CURSOR */
+#cur,#ring{position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur{width:8px;height:8px;background:#F5C842;border-radius:50%;box-shadow:0 0 10px #F5C842;}
+#ring{width:26px;height:26px;border:1px solid rgba(212,160,23,.28);border-radius:50%;z-index:9998;transition:width .2s,height .2s;}
+@media(max-width:768px){#cur,#ring{display:none;}}
+
+/* BG */
+canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+#grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:64px 64px;}
+
+/* SCROLL PROG */
+#prog{position:fixed;top:0;left:0;height:2px;z-index:9999;background:linear-gradient(90deg,#8B6410,#F5C842,#D4A017);width:0%;pointer-events:none;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:600;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(0,0,0,.88);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,160,23,.1);transition:background .3s;}
+nav.solid{background:rgba(0,0,0,.98);}
+.nlo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.16em;text-decoration:none;display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+.nlo-m{color:#fff;}.nlo-m span{color:#F5C842;text-shadow:0 0 18px rgba(245,200,66,.7);}
+.nlo-s{font-size:8px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:rgba(212,160,23,.4);font-family:'DM Sans',sans-serif;}
+.nlinks{display:flex;align-items:center;justify-content:center;gap:28px;list-style:none;position:absolute;left:50%;transform:translateX(-50%);}
+.nlinks a{font-size:12px;color:rgba(255,255,255,.42);text-decoration:none;transition:color .2s;letter-spacing:.05em;position:relative;padding-bottom:2px;white-space:nowrap;}
+.nlinks a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:#D4A017;transform:scaleX(0);transform-origin:left;transition:transform .25s;}
+.nlinks a:hover,.nlinks a.act{color:#D4A017;}
+.nlinks a:hover::after,.nlinks a.act::after{transform:scaleX(1);}
+.nr{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.nbtn{display:inline-flex;align-items:center;background:linear-gradient(135deg,#A07010,#F5C842 50%,#A07010);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 18px;border-radius:3px;text-decoration:none;transition:background-position .4s,box-shadow .3s;box-shadow:0 0 18px rgba(212,160,23,.22);white-space:nowrap;}
+.nbtn:hover{background-position:right center;box-shadow:0 0 32px rgba(212,160,23,.5);}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;z-index:700;background:none;border:none;}
+.hbg span{display:block;width:22px;height:2px;background:#D4A017;border-radius:2px;transition:transform .3s,opacity .3s;}
+.hbg.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hbg.open span:nth-child(2){opacity:0;}
+.hbg.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:900px){.nlinks{display:none;}nav{padding:0 20px;}.hbg{display:flex;}}
+@media(max-width:480px){.nbtn{font-size:10px;padding:8px 14px;}}
+.sidebar{position:fixed;top:0;right:-280px;width:260px;height:100vh;background:#0a0a0a;border-left:1px solid rgba(212,160,23,.15);z-index:650;transition:right .32s cubic-bezier(.22,1,.36,1);padding:80px 28px 40px;display:flex;flex-direction:column;gap:4px;}
+.sidebar.open{right:0;}
+.sidebar a{font-size:14px;font-weight:500;color:rgba(255,255,255,.45);text-decoration:none;padding:13px 16px;border-radius:6px;transition:background .2s,color .2s;letter-spacing:.03em;}
+.sidebar a:hover,.sidebar a.act{background:rgba(212,160,23,.08);color:#D4A017;}
+.sidebar-div{height:1px;background:rgba(255,255,255,.06);margin:10px 0;}
+.sidebar-cta{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#A07010 0%,#F5C842 50%,#A07010 100%);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:13px;border-radius:3px;text-decoration:none;margin-top:auto;box-shadow:0 0 20px rgba(212,160,23,.22);}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:640;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px);}
+.overlay.open{opacity:1;pointer-events:all;}
+
+/* DIVIDER */
+.gd{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(212,160,23,.12),transparent);}
+
+/* SECTIONS */
+.sec{max-width:1100px;margin:0 auto;padding:80px 48px;position:relative;z-index:2;}
+.ctr{text-align:center;}
+@media(max-width:768px){.sec{padding:60px 20px;}}
+@media(max-width:480px){.sec{padding:48px 16px;}}
+
+/* STAGGER REVEAL */
+.r{opacity:0;transform:translateY(20px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.08s;}.d2{transition-delay:.16s;}.d3{transition-delay:.24s;}.d4{transition-delay:.32s;}.d5{transition-delay:.4s;}
+
+/* STAG LABEL */
+.stag{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:#D4A017;margin-bottom:18px;background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.2);border-radius:4px;padding:5px 14px;}
+.stag::before{content:'';width:5px;height:5px;border-radius:50%;background:#D4A017;box-shadow:0 0 8px rgba(212,160,23,.8);animation:bpulse 2s infinite;}
+@keyframes bpulse{0%,100%{opacity:1;}50%{opacity:.2;}}
+
+/* HEADINGS */
+.sh{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5.5vw,64px);line-height:.92;letter-spacing:.03em;margin-bottom:16px;}
+.sh .w{color:#E8E8E8;}.sh .g{color:#F5C842;text-shadow:0 0 36px rgba(245,200,66,.28);}
+.sp{font-size:15px;color:rgba(255,255,255,.42);line-height:1.9;font-weight:300;}
+
+/* FOOTER */
+footer{border-top:1px solid rgba(212,160,23,.1);padding:30px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;position:relative;z-index:2;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);}
+.flo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.18em;color:rgba(255,255,255,.5);}
+.flo span{color:#F5C842;text-shadow:0 0 14px rgba(245,200,66,.5);}
+.fsub{font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(212,160,23,.35);font-family:'DM Sans',sans-serif;margin-top:2px;}
+.fli{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.fli a{font-size:12px;color:rgba(255,255,255,.3);text-decoration:none;transition:color .2s;}
+.fli a:hover{color:#D4A017;}
+.fco{font-size:10px;color:rgba(255,255,255,.15);}
+@media(max-width:768px){footer{padding:22px 20px;flex-direction:column;text-align:center;align-items:center;gap:12px;}.fli{gap:12px;}}
+@media(max-width:480px){footer{padding:20px 16px;}.fli{flex-direction:column;gap:8px;align-items:center;}.fli a{font-size:13px;}}
+
+/* ─── HERO ─── */
+.ph{padding:130px 24px 70px;text-align:center;position:relative;overflow:hidden;z-index:2;}
+.ph-orb{position:absolute;border-radius:50%;pointer-events:none;filter:blur(90px);}
+.ph-orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(212,160,23,.12) 0%,transparent 70%);top:-200px;left:50%;transform:translateX(-50%);}
+.ph-orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(245,200,66,.07) 0%,transparent 70%);bottom:-100px;left:20%;}
+.ph-orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(212,160,23,.06) 0%,transparent 70%);bottom:-100px;right:15%;}
+.phgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,160,23,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,23,.018) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,black 0%,transparent 100%);}
+.ph-in{position:relative;z-index:2;}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:9px;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:#D4A017;margin-bottom:22px;opacity:0;animation:fadeUp .6s .1s forwards;}
+.ph-eyedot{width:6px;height:6px;border-radius:50%;background:#F5C842;box-shadow:0 0 10px rgba(245,200,66,.9);animation:bpulse 2s infinite;}
+.phtitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,110px);line-height:.86;letter-spacing:.015em;margin-bottom:16px;opacity:0;animation:fadeUp .8s .2s forwards;}
+.phtitle .w{color:#E8E8E8;display:block;}
+.phtitle .g{background:linear-gradient(135deg,#F5C842 0%,#D4A017 55%,#8B6410 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;}
+.phsub{font-size:16px;color:rgba(255,255,255,.45);line-height:1.8;max-width:520px;margin:0 auto 12px;opacity:0;animation:fadeUp .8s .34s forwards;}
+.ph-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px;opacity:0;animation:fadeUp .8s .46s forwards;}
+.ph-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08);padding:6px 14px;border-radius:100px;transition:border-color .3s,color .3s;}
+.ph-pill:hover{border-color:rgba(212,160,23,.35);color:#D4A017;}
+.ph-pill span{color:#D4A017;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+/* ─── TOGGLE ─── */
+.toggle-wrap{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:44px;position:relative;z-index:5;}
+.toggle-label{font-size:13px;color:rgba(255,255,255,.4);font-weight:500;transition:color .3s;}
+.toggle-label.active{color:#F5C842;}
+.toggle-track{width:48px;height:26px;background:rgba(255,255,255,.08);border:1px solid rgba(212,160,23,.2);border-radius:100px;position:relative;cursor:pointer;transition:background .3s;}
+.toggle-track.on{background:rgba(212,160,23,.18);border-color:rgba(212,160,23,.5);}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#D4A017;border-radius:50%;transition:transform .3s cubic-bezier(.22,1,.36,1);box-shadow:0 0 8px rgba(212,160,23,.7);}
+.toggle-track.on .toggle-thumb{transform:translateX(22px);}
+.toggle-save{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.1em;color:#000;background:#F5C842;padding:3px 10px;border-radius:100px;animation:savepulse 2s infinite;}
+@keyframes savepulse{0%,100%{box-shadow:0 0 0 0 rgba(245,200,66,.5);}50%{box-shadow:0 0 0 6px rgba(245,200,66,0);}}
+
+/* ─── PLAN CARDS ─── */
+.plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1000px;margin:0 auto;}
+@media(max-width:820px){.plans-grid{grid-template-columns:1fr;max-width:560px;}}
+
+.plan-card{border-radius:18px;padding:44px 40px 40px;position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s;}
+.plan-card:hover{transform:translateY(-4px);}
+
+/* STANDARD */
+.plan-standard{background:rgba(10,10,10,.96);border:1px solid rgba(255,255,255,.1);}
+.plan-standard::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);}
+.plan-standard:hover{box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 40px rgba(212,160,23,.08);}
+
+/* ENTERPRISE */
+.plan-enterprise{background:rgba(14,10,0,.98);border:1px solid rgba(212,160,23,.45);box-shadow:0 0 60px rgba(212,160,23,.12),inset 0 0 60px rgba(212,160,23,.02);}
+.plan-enterprise::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#F5C842,transparent);}
+.plan-enterprise:hover{box-shadow:0 20px 80px rgba(0,0,0,.7),0 0 80px rgba(212,160,23,.2);}
+
+/* ENTERPRISE GLOW PARTICLES */
+.plan-enterprise .bg-glow{position:absolute;top:-40%;right:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(212,160,23,.07) 0%,transparent 65%);pointer-events:none;animation:glowFloat 6s ease-in-out infinite;}
+@keyframes glowFloat{0%,100%{transform:translate(0,0);}50%{transform:translate(-20px,20px);}}
+
+.plan-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#A07010,#F5C842);color:#000;font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+.plan-badge-outline{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.38);font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+
+.plan-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.06em;color:#E8E8E8;margin-bottom:4px;}
+.plan-name-gold{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.06em;color:#F5C842;text-shadow:0 0 20px rgba(245,200,66,.45);margin-bottom:4px;}
+.plan-tagline{font-size:12px;color:rgba(255,255,255,.3);margin-bottom:24px;line-height:1.5;}
+
+.plan-price{display:flex;align-items:flex-end;gap:4px;margin-bottom:6px;}
+.plan-price-num{font-family:'Bebas Neue',sans-serif;font-size:76px;line-height:1;background:linear-gradient(135deg,#fff 20%,#F5C842 60%,#D4A017 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.plan-price-num-dim{font-family:'Bebas Neue',sans-serif;font-size:76px;line-height:1;color:rgba(255,255,255,.65);}
+.plan-price-sup{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(255,255,255,.5);margin-bottom:12px;}
+.plan-price-sub{font-size:14px;color:rgba(255,255,255,.3);font-weight:300;margin-bottom:12px;}
+.plan-setup{font-size:12px;color:rgba(255,255,255,.38);margin-bottom:24px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.07);}
+.plan-setup strong{color:#D4A017;}
+
+/* ANNUAL PRICES */
+.price-monthly,.price-annual{transition:opacity .3s,transform .3s;}
+.price-annual{display:none;}
+.annual-mode .price-monthly{display:none;}
+.annual-mode .price-annual{display:flex;}
+
+/* FEATURES LIST */
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.plan-features li{font-size:13.5px;color:rgba(255,255,255,.72);display:flex;align-items:flex-start;gap:10px;line-height:1.45;}
+.plan-features li .ic{flex-shrink:0;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;margin-top:1px;}
+.plan-features li .ic-gold{background:rgba(212,160,23,.15);border:1px solid rgba(212,160,23,.35);color:#D4A017;}
+.plan-features li .ic-dim{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);}
+.plan-features li.feat-highlight{color:#F5C842;font-weight:600;}
+.plan-features li .feat-new{display:inline-flex;align-items:center;font-size:8px;font-weight:700;letter-spacing:.1em;color:#000;background:#F5C842;padding:1px 6px;border-radius:100px;margin-left:6px;vertical-align:middle;}
+
+.pf-section-label{font-size:9px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,160,23,.5);margin:16px 0 10px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);}
+
+.pbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#A07010 0%,#F5C842 50%,#A07010 100%);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:17px;border-radius:5px;text-decoration:none;transition:background-position .4s,transform .2s,box-shadow .3s;box-shadow:0 0 28px rgba(212,160,23,.3);width:100%;position:relative;overflow:hidden;}
+.pbtn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 38%,rgba(255,255,255,.12) 50%,transparent 62%);transform:translateX(-100%);transition:transform .5s;}
+.pbtn:hover{background-position:right center;transform:translateY(-2px);box-shadow:0 0 48px rgba(212,160,23,.55);}
+.pbtn:hover::after{transform:translateX(100%);}
+
+.pbtn-outline{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(212,160,23,.28);color:rgba(255,255,255,.55);font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:16px;border-radius:5px;text-decoration:none;transition:border-color .3s,color .3s,background .3s;width:100%;}
+.pbtn-outline:hover{border-color:#D4A017;color:#D4A017;background:rgba(212,160,23,.05);}
+
+/* MOST POPULAR */
+.popular-ribbon{position:absolute;top:20px;right:-1px;display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#A07010,#F5C842);color:#000;font-family:'Outfit',sans-serif;font-size:8px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;padding:5px 16px 5px 14px;border-radius:3px 0 0 3px;}
+
+/* ─── ENTERPRISE SPOTLIGHT ─── */
+.ent-spotlight{position:relative;z-index:2;padding:80px 48px;max-width:1100px;margin:0 auto;}
+.ent-inner{background:rgba(10,7,0,.98);border:1px solid rgba(212,160,23,.3);border-radius:20px;padding:64px;overflow:hidden;position:relative;}
+.ent-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#F5C842 20%,#D4A017 80%,transparent);}
+.ent-bg-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.08) 0%,transparent 65%);top:-200px;right:-200px;pointer-events:none;animation:slowDrift 10s ease-in-out infinite;}
+@keyframes slowDrift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-30px,30px) scale(1.05);}}
+.ent-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;position:relative;z-index:2;}
+@media(max-width:820px){.ent-grid{grid-template-columns:1fr;gap:40px;}.ent-spotlight{padding:60px 20px;}.ent-inner{padding:40px 28px;}}
+.ent-left .e-eyebrow{font-size:9px;font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:#D4A017;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.ent-left .e-eyebrow::before{content:'';width:20px;height:1px;background:#D4A017;}
+.ent-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,66px);line-height:.9;letter-spacing:.02em;margin-bottom:20px;}
+.ent-title .w{color:#E8E8E8;display:block;}
+.ent-title .g{background:linear-gradient(135deg,#F5C842,#D4A017);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;}
+.ent-desc{font-size:15px;color:rgba(255,255,255,.42);line-height:1.85;margin-bottom:32px;}
+.ent-price-display{display:flex;align-items:flex-end;gap:6px;margin-bottom:8px;}
+.ent-price-num{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;background:linear-gradient(135deg,#fff 20%,#F5C842 60%,#D4A017 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ent-price-info{padding-bottom:10px;}
+.ent-price-mo{font-size:16px;color:rgba(255,255,255,.4);display:block;}
+.ent-price-setup{font-size:12px;color:rgba(212,160,23,.6);display:block;margin-top:2px;}
+.ent-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.ent-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#A07010 0%,#F5C842 50%,#A07010 100%);background-size:200% auto;color:#000;font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 28px;border-radius:4px;text-decoration:none;transition:background-position .4s,box-shadow .3s;box-shadow:0 0 24px rgba(212,160,23,.3);}
+.ent-btn:hover{background-position:right center;box-shadow:0 0 40px rgba(212,160,23,.55);}
+.ent-btn-outline{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(212,160,23,.25);color:#D4A017;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:14px 24px;border-radius:4px;text-decoration:none;transition:border-color .3s,background .3s;}
+.ent-btn-outline:hover{background:rgba(212,160,23,.08);border-color:rgba(212,160,23,.5);}
+
+/* ENTERPRISE RIGHT COLUMN */
+.ent-right{display:flex;flex-direction:column;gap:14px;}
+.ent-feat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:20px 22px;transition:border-color .3s,background .3s;display:flex;gap:16px;align-items:flex-start;}
+.ent-feat-card:hover{border-color:rgba(212,160,23,.25);background:rgba(212,160,23,.03);}
+.ent-feat-ic{width:38px;height:38px;border-radius:8px;background:rgba(212,160,23,.1);border:1px solid rgba(212,160,23,.2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.ent-feat-body{}
+.ent-feat-title{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#E8E8E8;margin-bottom:4px;}
+.ent-feat-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.6;}
+
+/* ─── USAGE COSTS ─── */
+.ugrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
+.ug{padding:28px 24px;text-align:center;background:rgba(8,8,8,.92);border:1px solid rgba(255,255,255,.07);border-radius:12px;transition:border-color .3s,transform .3s;}
+.ug:hover{border-color:rgba(212,160,23,.2);transform:translateY(-3px);}
+.ug-icon{font-size:28px;margin-bottom:12px;}
+.ug-p{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#F5C842;letter-spacing:.04em;text-shadow:0 0 20px rgba(245,200,66,.35);}
+.ug-l{font-size:12px;color:rgba(255,255,255,.32);margin-top:6px;line-height:1.6;}
+@media(max-width:560px){.ugrid{grid-template-columns:1fr;}}
+
+/* ─── FEATURES GRID ─── */
+.ilist{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:32px;}
+@media(max-width:820px){.ilist{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ilist{grid-template-columns:1fr;}}
+.iitem{background:rgba(8,8,8,.92);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:22px 20px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden;}
+.iitem::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,160,23,.1),transparent);opacity:0;transition:opacity .3s;}
+.iitem:hover{border-color:rgba(212,160,23,.25);transform:translateY(-2px);}
+.iitem:hover::before{opacity:1;}
+.iitem-ic{font-size:22px;margin-bottom:10px;display:block;}
+.iitem-t{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#E8E8E8;margin-bottom:5px;}
+.iitem-d{font-size:12px;color:rgba(255,255,255,.32);line-height:1.65;}
+
+/* ─── COMPARISON TABLE ─── */
+.comp-table{width:100%;border-collapse:collapse;margin-top:32px;position:relative;z-index:2;}
+.comp-table thead th{padding:14px 20px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.08);}
+.comp-table thead .th-std{color:rgba(255,255,255,.5);text-align:center;}
+.comp-table thead .th-ent{color:#F5C842;text-align:center;background:rgba(212,160,23,.05);border-radius:8px 8px 0 0;}
+.comp-table tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .2s;}
+.comp-table tbody tr:hover{background:rgba(255,255,255,.02);}
+.comp-table td{padding:13px 20px;font-size:13px;color:rgba(255,255,255,.6);vertical-align:middle;}
+.comp-table td.feat-name{color:rgba(255,255,255,.75);font-weight:500;}
+.comp-table td.val-std,.comp-table td.val-ent{text-align:center;}
+.comp-table td.val-ent{background:rgba(212,160,23,.03);}
+.check-gold{color:#F5C842;font-size:15px;}
+.check-dim{color:rgba(255,255,255,.2);font-size:15px;}
+.val-text-gold{color:#F5C842;font-size:12px;font-weight:600;}
+.val-text-dim{color:rgba(255,255,255,.3);font-size:12px;}
+@media(max-width:640px){.comp-table{display:none;}}
+
+/* ─── CTA BOTTOM ─── */
+.cta-box{background:rgba(212,160,23,.04);border:1px solid rgba(212,160,23,.2);border-radius:16px;padding:64px 52px;position:relative;overflow:hidden;}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#F5C842,transparent);}
+.cta-box-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,160,23,.06) 0%,transparent 65%);top:-200px;right:-100px;pointer-events:none;}
+@media(max-width:640px){.cta-box{padding:40px 24px;}}
+
+/* FLOATING BADGE ANIMATION */
+@keyframes floatBadge{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+.float-badge{animation:floatBadge 3s ease-in-out infinite;}
+
+/* NUMBER COUNTER */
+.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;}
+@media(max-width:640px){.count-grid{grid-template-columns:1fr 1fr;}}
+.count-item{padding:28px 20px;text-align:center;border-right:1px solid rgba(255,255,255,.07);position:relative;}
+.count-item:last-child{border-right:none;}
+@media(max-width:640px){.count-item:nth-child(2){border-right:none;}.count-item:nth-child(3){border-right:1px solid rgba(255,255,255,.07);}.count-item{border-bottom:1px solid rgba(255,255,255,.07);}.count-item:nth-child(3),.count-item:nth-child(4){border-bottom:none;}}
+.count-num{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:.02em;background:linear-gradient(135deg,#fff 20%,#F5C842 60%,#D4A017 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.count-label{font-size:11px;color:rgba(255,255,255,.3);margin-top:4px;line-height:1.4;}
+
+/* ANIMATED MARQUEE TICKER */
+.ticker-wrap{overflow:hidden;position:relative;z-index:2;padding:16px 0;border-top:1px solid rgba(212,160,23,.08);border-bottom:1px solid rgba(212,160,23,.08);background:rgba(212,160,23,.02);}
+.ticker-inner{display:flex;width:max-content;animation:marquee 28s linear infinite;}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.3);padding:0 36px;white-space:nowrap;letter-spacing:.05em;}
+.ticker-item span{color:#D4A017;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* SHIMMER */
+@keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="cur"></div><div id="ring"></div>
+<canvas id="starfield"></canvas>
+<div id="grid"></div>
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <a href="index.html">Home</a>
+  <a href="plans.html" class="act">Pricing</a>
+  <a href="affiliate.html">Affiliates</a>
+  <div class="sidebar-div"></div>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms of Use</a>
+  <div class="sidebar-div"></div>
+  <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" rel="noopener noreferrer" class="sidebar-cta">Book a Call →</a>
+</div>
+
+<nav>
+  <a href="index.html" class="nlo"><div class="nlo-m">EKON <span>CRM</span></div><div class="nlo-s">Wholesale Real Estate Platform</div></a>
+  <ul class="nlinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plans.html" class="act">Pricing</a></li>
+    <li><a href="affiliate.html">Affiliates</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+  </ul>
+  <div class="nr">
+    <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" rel="noopener noreferrer" class="nbtn">Book a Call</a>
+  </div>
+  <button class="hbg" id="hbg" aria-label="Menu" onclick="toggleSidebar()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="ph">
+  <div class="ph-orb ph-orb1"></div>
+  <div class="ph-orb ph-orb2"></div>
+  <div class="ph-orb ph-orb3"></div>
+  <div class="phgrid"></div>
+  <div class="ph-in">
+    <div class="ph-eyebrow"><span class="ph-eyedot"></span>Simple Pricing</div>
+    <h1 class="phtitle"><span class="w">Two Plans.</span><span class="g">Zero Fluff.</span></h1>
+    <p class="phsub">Got your LLC? Bring it. Don't have one yet? Rent a ready-to-go A2P account and start dialing. Both plans, same full build — day one.</p>
+    <div class="ph-pills">
+      <span class="ph-pill"><span>✦</span> $250 setup — both plans</span>
+      <span class="ph-pill"><span>✦</span> No long-term contracts</span>
+      <span class="ph-pill"><span>✦</span> Cancel anytime</span>
+      <span class="ph-pill"><span>✦</span> A2P registered & ready</span>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item"><span>✦</span> Full CRM Access</span>
+    <span class="ticker-item"><span>✦</span> Automated Follow-Up</span>
+    <span class="ticker-item"><span>✦</span> A2P SMS Compliance</span>
+    <span class="ticker-item"><span>✦</span> Seller Lead Website</span>
+    <span class="ticker-item"><span>✦</span> Cold Call Workflows</span>
+    <span class="ticker-item"><span>✦</span> KPI Dashboard</span>
+    <span class="ticker-item"><span>✦</span> Pipeline Management</span>
+    <span class="ticker-item"><span>✦</span> Automated Drip Sequences</span>
+    <span class="ticker-item"><span>✦</span> Cash Buyer Database</span>
+    <span class="ticker-item"><span>✦</span> Revenue Tracker</span>
+    <span class="ticker-item"><span>✦</span> Done For You Build</span>
+    <span class="ticker-item"><span>✦</span> Priority Support</span>
+  </div>
+</div>
+
+<div class="gd"></div>
+
+<!-- PLAN CARDS -->
+<section class="sec" style="padding-top:60px;">
+  <!-- BILLING TOGGLE -->
+  <div class="toggle-wrap r">
+    <span class="toggle-label active" id="lbl-monthly">Monthly</span>
+    <div class="toggle-track" id="billingToggle" onclick="toggleBilling()">
+      <div class="toggle-thumb"></div>
+    </div>
+    <span class="toggle-label" id="lbl-annual">Annual</span>
+    <span class="toggle-save float-badge">Save 20%</span>
+  </div>
+
+  <div class="plans-grid r d1" id="planContainer">
+    <!-- STANDARD -->
+    <div class="plan-card plan-standard">
+      <div class="plan-badge-outline">LLC + EIN Required</div>
+      <div class="plan-name">EKON Standard</div>
+      <p class="plan-tagline">You've got your LLC and EIN — let's build your operation. Full CRM, full automation, done for you from day one.</p>
+      <div class="plan-price price-monthly">
+        <span class="plan-price-sup">$</span>
+        <span class="plan-price-num-dim">119</span>
+        <span class="plan-price-sub">/mo</span>
+      </div>
+      <div class="plan-price price-annual" style="display:none;">
+        <span class="plan-price-sup">$</span>
+        <span class="plan-price-num-dim" style="font-size:76px;color:rgba(255,255,255,.65)">95</span>
+        <span class="plan-price-sub">/mo · billed annually</span>
+      </div>
+      <div class="plan-setup">One-time <strong>$250 setup fee</strong> · Full done-for-you build · A2P registered under your LLC<br><span style="font-size:11px;color:rgba(255,255,255,.25);">Competitors charge $1,500–$3,000+ for the same setup. You're in for $250.</span></div>
+
+      <p class="pf-section-label">Core Platform</p>
+      <ul class="plan-features">
+        <li><span class="ic ic-dim">✦</span>Full GoHighLevel CRM Access</li>
+        <li><span class="ic ic-dim">✦</span>Seller Pipeline (Lead → Offer → Closed)</li>
+        <li><span class="ic ic-dim">✦</span>SMS, Email &amp; Multi-Channel</li>
+        <li><span class="ic ic-dim">✦</span>Workflow Builder</li>
+        <li><span class="ic ic-dim">✦</span>Prebuilt Automation Templates</li>
+        <li><span class="ic ic-dim">✦</span>Cash Buyer Database</li>
+        <li><span class="ic ic-dim">✦</span>Offer Calculator (instant MAO &amp; ARV)</li>
+      </ul>
+      <p class="pf-section-label">Follow-Up &amp; Automation</p>
+      <ul class="plan-features">
+        <li><span class="ic ic-dim">✦</span>Automated Follow-Up Sequences</li>
+        <li><span class="ic ic-dim">✦</span>Lead Qualification Workflows</li>
+        <li><span class="ic ic-dim">✦</span>Lead Nurturing — multi-touch drip campaigns</li>
+        <li><span class="ic ic-dim">✦</span>Auto Dispo Blast System</li>
+        <li><span class="ic ic-dim">✦</span>Missed Call Text-Back</li>
+        <li><span class="ic ic-dim">✦</span>Drip Sequences &amp; Opt-Out Handling</li>
+        <li><span class="ic ic-dim">✦</span>SMS Failure Handling + Opt-Out Isolation</li>
+      </ul>
+      <p class="pf-section-label">Done-For-You Setup</p>
+      <ul class="plan-features">
+        <li><span class="ic ic-dim">✦</span>Seller Lead Website Built</li>
+        <li><span class="ic ic-dim">✦</span>A2P / 10DLC Registered Under Your LLC</li>
+        <li><span class="ic ic-dim">✦</span>2 Onboarding Sessions</li>
+        <li><span class="ic ic-dim">✦</span>Priority Support</li>
+      </ul>
+      <p class="pf-section-label">Tracking &amp; Analytics</p>
+      <ul class="plan-features">
+        <li><span class="ic ic-dim">✦</span>EKON KPI Dashboard</li>
+        <li><span class="ic ic-dim">✦</span>Revenue &amp; Profit Tracker</li>
+        <li><span class="ic ic-dim">✦</span>Deal Velocity &amp; Goal Tracker</li>
+        <li><span class="ic ic-dim">✦</span>Full Reporting Dashboard</li>
+      </ul>
+      <p style="font-size:10px;color:rgba(255,255,255,.18);margin-bottom:20px;line-height:1.6;">Requires an active LLC + EIN. Don't have one? See the Hosted plan →</p>
+
+      <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" rel="noopener noreferrer" class="pbtn-outline">Get Started →</a>
+    </div>
+
+    <!-- HOSTED -->
+    <div class="plan-card plan-enterprise">
+      <div class="bg-glow"></div>
+      <div class="popular-ribbon">⚡ No LLC Needed</div>
+      <div class="plan-badge">Skip The Entity · Plug In &amp; Go</div>
+      <div class="plan-name-gold">EKON Hosted</div>
+      <p class="plan-tagline" style="color:rgba(255,255,255,.4);">No LLC, not old enough, or just not ready? Rent a pre-approved A2P account and run your wholesale operation from day one — no entity required.</p>
+      <div class="plan-price price-monthly">
+        <span class="plan-price-sup" style="color:rgba(245,200,66,.6);">$</span>
+        <span class="plan-price-num">175</span>
+        <span class="plan-price-sub">/mo</span>
+      </div>
+      <div class="plan-price price-annual" style="display:none;">
+        <span class="plan-price-sup" style="color:rgba(245,200,66,.6);">$</span>
+        <span class="plan-price-num">140</span>
+        <span class="plan-price-sub">/mo · billed annually</span>
+      </div>
+      <div class="plan-setup" style="border-bottom-color:rgba(212,160,23,.15);">One-time <strong>$250 setup fee</strong> · Full done-for-you build · A2P-approved account included<br><span style="font-size:11px;color:rgba(255,255,255,.25);">You operate under our registered entity. Same full CRM build — zero entity headache.</span></div>
+
+      <p class="pf-section-label" style="border-top-color:rgba(212,160,23,.12);">Everything in Standard — Same Full Build:</p>
+      <ul class="plan-features">
+        <li><span class="ic ic-gold">✦</span>Full GoHighLevel CRM Access</li>
+        <li><span class="ic ic-gold">✦</span>Seller Pipeline (Lead → Offer → Closed)</li>
+        <li><span class="ic ic-gold">✦</span>SMS, Email &amp; Multi-Channel</li>
+        <li><span class="ic ic-gold">✦</span>Workflow Builder &amp; Automation Templates</li>
+        <li><span class="ic ic-gold">✦</span>Cash Buyer Database</li>
+        <li><span class="ic ic-gold">✦</span>Offer Calculator (instant MAO &amp; ARV)</li>
+      </ul>
+      <p class="pf-section-label" style="border-top-color:rgba(212,160,23,.12);">Follow-Up &amp; Automation</p>
+      <ul class="plan-features">
+        <li><span class="ic ic-gold">✦</span>Automated Follow-Up Sequences</li>
+        <li><span class="ic ic-gold">✦</span>Lead Qualification Workflows</li>
+        <li><span class="ic ic-gold">✦</span>Lead Nurturing — multi-touch drip campaigns</li>
+        <li><span class="ic ic-gold">✦</span>Auto Dispo Blast System</li>
+        <li><span class="ic ic-gold">✦</span>Missed Call Text-Back</li>
+        <li><span class="ic ic-gold">✦</span>Drip Sequences &amp; Opt-Out Handling</li>
+      </ul>
+      <p class="pf-section-label" style="border-top-color:rgba(212,160,23,.12);">What's Different — Hosted</p>
+      <ul class="plan-features">
+        <li class="feat-highlight"><span class="ic ic-gold">✦</span>Pre-Approved A2P Account Included <span class="feat-new">HOSTED</span></li>
+        <li><span class="ic ic-gold">✦</span><span>You operate under our registered business entity — <strong style="color:rgba(255,255,255,.85);">no LLC or EIN required</strong></span></li>
+        <li><span class="ic ic-gold">✦</span>Seller Lead Website Built</li>
+        <li><span class="ic ic-gold">✦</span>2 Onboarding Sessions</li>
+        <li><span class="ic ic-gold">✦</span>Priority Support</li>
+        <li><span class="ic ic-gold">✦</span>EKON KPI Dashboard &amp; Revenue Tracker</li>
+      </ul>
+      <p style="font-size:10px;color:rgba(212,160,23,.35);margin-bottom:20px;line-height:1.6;">Perfect for minors, new operators, or anyone who wants to move fast without the entity setup. Upgrade to Standard anytime once you've got your LLC.</p>
+
+      <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" rel="noopener noreferrer" class="pbtn">Get Hosted Access →</a>
+    </div>
+  </div>
+</section>
+
+<div class="gd"></div>
+
+<!-- STATS -->
+<section class="sec ctr" style="padding:56px 48px;">
+  <div class="count-grid r">
+    <div class="count-item">
+      <div class="count-num" data-t="119" data-s="">$<span class="cnum">0</span></div>
+      <div class="count-label">Standard plan<br>per month</div>
+    </div>
+    <div class="count-item">
+      <div class="count-num">$<span class="cnum" data-t="175" data-s="">0</span></div>
+      <div class="count-label">Hosted plan<br>per month</div>
+    </div>
+    <div class="count-item">
+      <div class="count-num">$<span class="cnum" data-t="250" data-s="">0</span></div>
+      <div class="count-label">Setup fee<br>both plans</div>
+    </div>
+    <div class="count-item">
+      <div class="count-num"><span class="cnum" data-t="0" data-s="">0</span></div>
+      <div class="count-label">Long-term contracts.<br>Cancel anytime.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- COMPARISON TABLE -->
+<section class="sec ctr">
+  <p class="stag r" style="justify-content:center;">Compare Plans</p>
+  <h2 class="sh r"><span class="w">Standard vs</span><br><span class="g">Hosted.</span></h2>
+  <p class="sp r" style="max-width:440px;margin:0 auto;">Same full build. The only difference is how your A2P account is registered.</p>
+
+  <table class="comp-table r d1">
+    <thead>
+      <tr>
+        <th style="text-align:left;padding-left:0;font-size:12px;color:rgba(255,255,255,.3);font-weight:400;width:40%;">Feature</th>
+        <th class="th-std">Standard<br><span style="font-size:10px;color:rgba(255,255,255,.25);font-weight:400;">$119/mo · LLC + EIN req'd</span></th>
+        <th class="th-ent">Hosted<br><span style="font-size:10px;color:rgba(212,160,23,.6);font-weight:400;">$175/mo · No LLC needed</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="feat-name">Full CRM Access (GHL)</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Seller Pipeline</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">SMS / Email / Multi-Channel</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Automated Follow-Up Sequences</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Lead Qualification Workflows</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Lead Nurturing Drip Campaigns</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Auto Dispo Blast</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Cash Buyer Database</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Offer Calculator (MAO &amp; ARV)</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">KPI Dashboard</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Revenue &amp; Profit Tracker</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Seller Lead Website Built</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Drip Sequences &amp; Opt-Out Handling</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Missed Call Text-Back</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Onboarding Sessions</td><td class="val-std"><span class="val-text-dim">2 sessions</span></td><td class="val-ent"><span class="val-text-dim">2 sessions</span></td></tr>
+      <tr><td class="feat-name">Priority Support</td><td class="val-std"><span class="check-gold">✓</span></td><td class="val-ent"><span class="check-gold">✓</span></td></tr>
+      <tr><td class="feat-name">Setup Fee</td><td class="val-std"><span class="val-text-dim">$250 one-time</span></td><td class="val-ent"><span class="val-text-dim">$250 one-time</span></td></tr>
+      <tr><td class="feat-name">LLC + EIN Required</td><td class="val-std"><span class="val-text-gold">Yes ✦</span></td><td class="val-ent"><span class="val-text-gold">No — not required ✦</span></td></tr>
+      <tr><td class="feat-name">A2P Account Registration</td><td class="val-std"><span class="val-text-dim">Under your LLC</span></td><td class="val-ent"><span class="val-text-gold">Pre-approved account provided ✦</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="gd"></div>
+
+<!-- USAGE COSTS -->
+<section class="sec ctr">
+  <p class="stag r" style="justify-content:center;">Usage Costs</p>
+  <h2 class="sh r"><span class="w">Only Pay for</span><br><span class="g">What You Send.</span></h2>
+  <p class="sp r" style="max-width:440px;margin:0 auto;">Your plan covers platform access. Messaging and calls are billed at cost — no surprise overages.</p>
+  <div class="ugrid">
+    <div class="ug r d1"><div class="ug-icon">💬</div><div class="ug-p">$0.01</div><div class="ug-l">per SMS segment<br>Less than a penny per text.</div></div>
+    <div class="ug r d2"><div class="ug-icon">📞</div><div class="ug-p">$0.01</div><div class="ug-l">per minute calling<br>Inbound and outbound.</div></div>
+    <div class="ug r d3"><div class="ug-icon">✉️</div><div class="ug-p">$0.01</div><div class="ug-l">per email sent<br>Pay only for what you send.</div></div>
+  </div>
+  <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:18px;" class="r">Usage billed at cost. Set limits inside the platform to stay in control.</p>
+</section>
+
+<div class="gd"></div>
+
+<!-- INCLUDED FEATURES GRID -->
+<section class="sec ctr">
+  <p class="stag r" style="justify-content:center;">Everything Included</p>
+  <h2 class="sh r"><span class="w">Built for Wholesalers.</span><br><span class="g">Not Everyone.</span></h2>
+  <p class="sp r" style="max-width:460px;margin:0 auto;">One plan, one login, nothing missing. From first dial to closed deal.</p>
+  <div class="ilist">
+    <div class="iitem r d1"><span class="iitem-ic">📞</span><div class="iitem-t">Cold Call Workflows</div><div class="iitem-d">Missed call text-back, auto follow-ups, and VA-ready dialing flows built in from day one.</div></div>
+    <div class="iitem r d2"><span class="iitem-ic">💬</span><div class="iitem-t">SMS, Email &amp; Multi-Channel</div><div class="iitem-d">10DLC-compliant SMS, drip sequences, and smart opt-out handling baked in.</div></div>
+    <div class="iitem r d3"><span class="iitem-ic">🏠</span><div class="iitem-t">Seller Pipeline</div><div class="iitem-d">Lead → Qualified → Offer → Contract → Closed. Track every deal across every market.</div></div>
+    <div class="iitem r d1"><span class="iitem-ic">📲</span><div class="iitem-t">Follow-Up & Lead Nurturing</div><div class="iitem-d">Automated follow-up sequences and multi-touch drip campaigns keep leads warm and re-engage cold contacts around the clock.</div></div>
+    <div class="iitem r d2"><span class="iitem-ic">🌐</span><div class="iitem-t">Seller Lead Website</div><div class="iitem-d">TCPA-compliant landing page with multi-step form and direct pipeline integration.</div></div>
+    <div class="iitem r d3"><span class="iitem-ic">📊</span><div class="iitem-t">Full KPI Dashboard</div><div class="iitem-d">Dials → Convos → Leads → Offers → Contracts → Deals. Full funnel visibility, zero guessing.</div></div>
+    <div class="iitem r d1"><span class="iitem-ic">💰</span><div class="iitem-t">Revenue &amp; Profit Tracker</div><div class="iitem-d">Log revenue, track expenses, real margin on every deal so you know exactly where you stand.</div></div>
+    <div class="iitem r d2"><span class="iitem-ic">🎯</span><div class="iitem-t">Goal &amp; Deal Velocity</div><div class="iitem-d">Monthly targets, deal speed metrics, and pipeline bottleneck tracking to stay on pace.</div></div>
+    <div class="iitem r d3"><span class="iitem-ic">⚡</span><div class="iitem-t">Done-For-You Build</div><div class="iitem-d">We don't hand you a blank CRM. Your setup is live, tested, and ready to dial on day one.</div></div>
+  </div>
+</section>
+
+<div class="gd"></div>
+
+<!-- CTA -->
+<section class="sec ctr" style="padding-bottom:100px;">
+  <div class="cta-box r">
+    <div class="cta-box-glow"></div>
+    <p class="stag" style="justify-content:center;">Ready to Move?</p>
+    <h2 class="sh" style="font-size:clamp(40px,6vw,72px);"><span class="w">Stop setting up.</span><br><span class="g">Start closing.</span></h2>
+    <p class="sp" style="max-width:440px;margin:14px auto 36px;">Standard at $119/mo — bring your LLC + EIN. Hosted at $175/mo — no LLC needed, A2P account included. Both plans $250 setup. No contracts, cancel anytime.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://calendly.com/ekonrei/ekoncrm" target="_blank" rel="noopener noreferrer" class="pbtn" style="max-width:280px;margin:0;">Book Onboarding Call →</a>
+      <a href="mailto:support@ekoncrm.com?subject=EKON CRM Question" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(212,160,23,.22);color:rgba(255,255,255,.45);font-size:12px;font-weight:600;padding:16px 28px;border-radius:5px;text-decoration:none;transition:border-color .3s,color .3s;letter-spacing:.08em;text-transform:uppercase;font-family:'Outfit',sans-serif;" onmouseenter="this.style.borderColor='#D4A017';this.style.color='#D4A017'" onmouseleave="this.style.borderColor='rgba(212,160,23,.22)';this.style.color='rgba(255,255,255,.45)'">Email Us</a>
+    </div>
+    <p style="font-size:12px;color:rgba(255,255,255,.2);margin-top:20px;">Want to earn by referring others? <a href="affiliate.html" style="color:#D4A017;text-decoration:none;font-weight:600;">Join the Affiliate Program — 30% recurring →</a></p>
+  </div>
+</section>
+
+<div class="gd"></div>
+
+<footer>
+  <div><div class="flo">EKON <span>CRM</span></div><div class="fsub">Powered by GoHighLevel · EKON Investments LLC</div></div>
+  <div class="fli"><a href="index.html">Home</a><a href="plans.html">Pricing</a><a href="affiliate.html">Affiliates</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a></div>
+  <p class="fco">© 2026 EKON Investments LLC. All rights reserved.</p>
+</footer>
+
+<script>
+// SCROLL PROGRESS
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{prog.style.width=(window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';},{passive:true});
+
+// NAV
+const nav=document.querySelector('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('solid',window.scrollY>60);},{passive:true});
+
+// CURSOR
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function t(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='13px';cur.style.height='13px';ring.style.width='34px';ring.style.height='34px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='8px';cur.style.height='8px';ring.style.width='26px';ring.style.height='26px';});
+});
+
+// STARFIELD
+const canvas=document.getElementById('starfield'),ctx=canvas.getContext('2d');
+let dots=[],W,H;
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;dots=[];for(let i=0;i<140;i++)dots.push({x:Math.random()*W,y:Math.random()*H,r:.3+Math.random()*1.0,phase:Math.random()*Math.PI*2,speed:.002+Math.random()*.006,base:.06+Math.random()*.32});}
+function draw(){ctx.clearRect(0,0,W,H);dots.forEach(d=>{d.phase+=d.speed;const a=d.base*(.3+.7*Math.sin(d.phase));ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${a})`;ctx.fill();});requestAnimationFrame(draw);}
+window.addEventListener('resize',resize,{passive:true});resize();requestAnimationFrame(draw);
+
+// REVEAL
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.04});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+
+// COUNTER
+const co=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target,t=+el.dataset.t,s=el.dataset.s||'';let c=0;const step=Math.max(t/60,0.5);const iv=setInterval(()=>{c=Math.min(c+step,t);el.textContent=Math.floor(c).toLocaleString()+s;if(c>=t)clearInterval(iv);},16);co.unobserve(el);});},{threshold:.5});
+document.querySelectorAll('.cnum[data-t]').forEach(el=>co.observe(el));
+
+// BILLING TOGGLE
+let isAnnual=false;
+function toggleBilling(){
+  isAnnual=!isAnnual;
+  const track=document.getElementById('billingToggle');
+  track.classList.toggle('on',isAnnual);
+  document.getElementById('lbl-monthly').classList.toggle('active',!isAnnual);
+  document.getElementById('lbl-annual').classList.toggle('active',isAnnual);
+  document.querySelectorAll('.price-monthly').forEach(el=>el.style.display=isAnnual?'none':'flex');
+  document.querySelectorAll('.price-annual').forEach(el=>el.style.display=isAnnual?'flex':'none');
+}
+
+// SIDEBAR
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar'),ov=document.getElementById('overlay'),hb=document.getElementById('hbg');
+  sb.classList.toggle('open');ov.classList.toggle('open');hb.classList.toggle('open');
+  document.body.style.overflow=sb.classList.contains('open')?'hidden':'';
+}
+</script>
+</body>
+</html>
