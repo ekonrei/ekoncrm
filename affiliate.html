@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affiliate Program – EKON CRM</title>
+<meta name="description" content="Earn 30% recurring commission every month for every wholesaler you refer to EKON CRM. No cap, no expiration. $29.10/mo per Executive referral, $36/mo per Hosted referral.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F9FC; --surface:#FFFFFF; --surface-2:#F1F5F9; --surface-3:#ECF1F7;
+  --ink:#0F172A; --ink-2:#475569; --ink-3:#8A97A8;
+  --line:#E3E9F0; --line-2:#D3DCE6;
+  --accent:#2563EB; --accent-d:#1B4ED1; --accent-ink:#16357F; --accent-t:#E9F0FE; --accent-glow:rgba(37,99,235,.16);
+  --ok:#10B981; --ok-t:#E6F7F0;
+  --display:'Bricolage Grotesque',sans-serif; --body:'Plus Jakarta Sans',sans-serif; --mono:'Space Mono',monospace;
+  --r:14px; --maxw:1120px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:80px;}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.6;}
+a{color:inherit;}
+::selection{background:var(--accent);color:#fff;}
+.eye{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-ink);}
+.eye::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--accent-t);}
+.sec{max-width:var(--maxw);margin:0 auto;padding:80px 40px;position:relative;}
+.ctr{text-align:center;}
+.lead{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.4vw,46px);line-height:1.02;letter-spacing:-.025em;color:var(--ink);}
+.lead em{font-style:normal;color:var(--accent);}
+.sub{font-size:17px;color:var(--ink-2);line-height:1.62;max-width:560px;}
+.ctr .sub{margin-left:auto;margin-right:auto;}
+@media(max-width:768px){.sec{padding:60px 22px;}}
+@media(max-width:460px){.sec{padding:50px 18px;}}
+.r{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);}
+.r.on{opacity:1;transform:none;}
+.d1{transition-delay:.06s;}.d2{transition-delay:.12s;}.d3{transition-delay:.18s;}.d4{transition-delay:.24s;}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:500;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(247,249,252,.82);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s;}
+nav.solid{border-bottom-color:var(--line);background:rgba(247,249,252,.94);}
+.logo{display:flex;flex-direction:column;text-decoration:none;line-height:1;}
+.logo-m{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.01em;color:var(--ink);}
+.logo-m span{color:var(--accent);}
+.logo-s{font-family:var(--mono);font-size:8.5px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);margin-top:3px;}
+.nlinks{display:flex;gap:30px;list-style:none;position:absolute;left:50%;transform:translateX(-50%);}
+.nlinks a{font-size:14px;font-weight:500;color:var(--ink-2);text-decoration:none;transition:color .2s;}
+.nlinks a:hover,.nlinks a.act{color:var(--accent);}
+.nbtn{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#fff;font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:10px;text-decoration:none;transition:background .2s,transform .15s,box-shadow .3s;box-shadow:0 1px 2px rgba(15,23,42,.08),0 6px 18px var(--accent-glow);}
+.nbtn:hover{background:var(--accent-d);transform:translateY(-1px);box-shadow:0 8px 24px var(--accent-glow);}
+.hbg{display:none;background:none;border:1px solid var(--line-2);border-radius:9px;width:40px;height:40px;cursor:pointer;color:var(--ink);align-items:center;justify-content:center;}
+@media(max-width:900px){.nlinks{display:none;}nav{padding:0 22px;}.hbg{display:flex;}.nr-desktop{display:none;}}
+.sheet{position:fixed;inset:0;z-index:600;background:rgba(15,23,42,.4);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .25s;}
+.sheet.open{opacity:1;pointer-events:auto;}
+.sheet-in{position:absolute;top:0;right:0;width:84%;max-width:320px;height:100%;background:var(--surface);padding:84px 26px 30px;display:flex;flex-direction:column;gap:4px;transform:translateX(100%);transition:transform .3s cubic-bezier(.22,1,.36,1);box-shadow:-20px 0 50px rgba(15,23,42,.12);}
+.sheet.open .sheet-in{transform:none;}
+.sheet-in a{font-size:16px;font-weight:500;color:var(--ink);text-decoration:none;padding:14px 14px;border-radius:10px;transition:background .15s,color .15s;}
+.sheet-in a:hover{background:var(--surface-2);color:var(--accent);}
+.sheet-div{height:1px;background:var(--line);margin:10px 4px;}
+.sheet-cta{margin-top:auto;justify-content:center;background:var(--accent);color:#fff!important;text-align:center;font-weight:600!important;}
+.sheet-x{position:absolute;top:20px;right:22px;width:40px;height:40px;border:1px solid var(--line);border-radius:9px;background:var(--surface);cursor:pointer;color:var(--ink);display:flex;align-items:center;justify-content:center;}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;padding:14px 26px;border-radius:12px;text-decoration:none;transition:background .2s,transform .15s,box-shadow .3s;box-shadow:0 2px 4px rgba(15,23,42,.06),0 10px 28px var(--accent-glow);}
+.btn:hover{background:var(--accent-d);transform:translateY(-2px);box-shadow:0 14px 36px var(--accent-glow);}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--surface);color:var(--ink);font-size:15px;font-weight:600;padding:14px 22px;border-radius:12px;text-decoration:none;border:1px solid var(--line-2);transition:border-color .2s,color .2s;}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+.ahero{max-width:var(--maxw);margin:0 auto;padding:130px 40px 20px;text-align:center;}
+.big-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-t);border:1px solid #D3E0FC;padding:8px 15px;border-radius:100px;}
+.ahero h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,5.4vw,64px);line-height:.98;letter-spacing:-.025em;margin:22px auto 18px;max-width:780px;color:var(--ink);}
+.ahero h1 em{font-style:normal;color:var(--accent);}
+@media(max-width:900px){.ahero{padding:108px 22px 14px;}}
+
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:760px;margin:34px auto 0;}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px 18px;}
+.stat-n{font-family:var(--display);font-weight:800;font-size:34px;letter-spacing:-.02em;color:var(--accent);line-height:1;}
+.stat-l{font-size:12.5px;color:var(--ink-2);margin-top:7px;}
+@media(max-width:600px){.stat-row{grid-template-columns:1fr;max-width:340px;}}
+
+.calc{max-width:760px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:38px 38px 34px;box-shadow:0 1px 2px rgba(15,23,42,.04),0 24px 56px -30px rgba(15,23,42,.22);}
+.calc-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
+.calc-top h3{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.01em;color:var(--ink);}
+.toggle{display:inline-flex;background:var(--surface-2);border:1px solid var(--line);border-radius:11px;padding:4px;}
+.toggle button{font-family:var(--body);font-size:13px;font-weight:600;color:var(--ink-2);background:none;border:none;padding:9px 16px;border-radius:8px;cursor:pointer;transition:background .2s,color .2s;}
+.toggle button.on{background:var(--accent);color:#fff;box-shadow:0 4px 12px var(--accent-glow);}
+.calc-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.calc-label span{font-size:14px;color:var(--ink-2);font-weight:500;}
+.calc-label b{font-family:var(--display);font-weight:800;font-size:22px;color:var(--ink);}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:8px;border-radius:100px;background:linear-gradient(90deg,var(--accent) 0%,var(--accent) 30%,var(--surface-2) 30%);outline:none;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-shadow:0 4px 12px var(--accent-glow);cursor:pointer;}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-shadow:0 4px 12px var(--accent-glow);cursor:pointer;}
+.calc-out{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px;}
+.co{background:var(--surface-2);border:1px solid var(--line);border-radius:13px;padding:22px 22px;}
+.co.hi{background:var(--accent);border-color:var(--accent);}
+.co-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);}
+.co.hi .co-l{color:#C9DBFF;}
+.co-n{font-family:var(--display);font-weight:800;font-size:38px;letter-spacing:-.02em;color:var(--ink);margin-top:6px;line-height:1;}
+.co.hi .co-n{color:#fff;}
+.calc-note{font-size:12.5px;color:var(--ink-3);margin-top:18px;text-align:center;line-height:1.5;}
+@media(max-width:560px){.calc{padding:28px 22px;}.calc-out{grid-template-columns:1fr;}}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;}
+.step-n{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-t);width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.step-t{font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);margin-bottom:7px;letter-spacing:-.01em;}
+.step-d{font-size:13.5px;color:var(--ink-2);line-height:1.58;}
+@media(max-width:880px){.steps{grid-template-columns:1fr 1fr;}}
+@media(max-width:460px){.steps{grid-template-columns:1fr;}}
+
+.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px;}
+.bc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;}
+.bc.feat{border:2px solid var(--accent);box-shadow:0 22px 50px -30px var(--accent-glow);}
+.bc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.bc-name{font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink);}
+.bc-tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-t);padding:6px 11px;border-radius:100px;}
+.bc-rate{font-family:var(--display);font-weight:800;font-size:42px;letter-spacing:-.02em;color:var(--accent);line-height:1;}
+.bc-per{font-size:14px;color:var(--ink-2);margin-top:4px;}
+.bc-yr{font-size:13px;color:var(--ink-3);margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+.bc-yr b{color:var(--ink);}
+@media(max-width:680px){.bgrid{grid-template-columns:1fr;}}
+
+.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px;}
+.wc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;text-align:center;}
+.wc-ic{width:46px;height:46px;border-radius:12px;background:var(--accent-t);color:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 15px;}
+.wc-t{font-family:var(--display);font-weight:700;font-size:15.5px;color:var(--ink);margin-bottom:6px;}
+.wc-d{font-size:13px;color:var(--ink-2);line-height:1.5;}
+@media(max-width:820px){.wgrid{grid-template-columns:1fr 1fr;}}
+@media(max-width:420px){.wgrid{grid-template-columns:1fr;}}
+
+.faq{max-width:760px;margin:0 auto;}
+.fitem{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);margin-bottom:11px;overflow:hidden;transition:border-color .2s;}
+.fitem[open]{border-color:var(--line-2);}
+.fitem summary{padding:20px 24px;font-family:var(--display);font-weight:700;font-size:16px;color:var(--ink);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;letter-spacing:-.01em;}
+.fitem summary::-webkit-details-marker{display:none;}
+.fitem summary .ic{flex-shrink:0;width:26px;height:26px;border-radius:8px;background:var(--accent-t);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:transform .25s;}
+.fitem[open] summary .ic{transform:rotate(45deg);}
+.fitem .ans{padding:0 24px 22px;font-size:14.5px;color:var(--ink-2);line-height:1.62;}
+.fitem .ans b{color:var(--ink);}
+
+.cta{max-width:var(--maxw);margin:0 auto;padding:0 40px 100px;}
+.cta-box{background:var(--accent);border-radius:24px;padding:60px 48px;text-align:center;position:relative;overflow:hidden;}
+.cta-box::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 50% -10%,rgba(255,255,255,.16),transparent 55%);pointer-events:none;}
+.cta-box .eye{color:#DBE7FF;position:relative;}
+.cta-box .eye::before{background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.2);}
+.cta-box h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,4.6vw,50px);line-height:1.02;letter-spacing:-.025em;color:#fff;margin:16px 0 14px;position:relative;}
+.cta-box p{font-size:16px;color:#DBE7FF;max-width:480px;margin:0 auto 30px;line-height:1.55;position:relative;}
+.cta-btns{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;position:relative;}
+.btn-white{display:inline-flex;align-items:center;gap:9px;background:#fff;color:var(--accent-ink);font-size:15px;font-weight:700;padding:15px 28px;border-radius:12px;text-decoration:none;transition:transform .15s,box-shadow .3s;box-shadow:0 10px 30px rgba(15,23,42,.2);}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(15,23,42,.28);}
+@media(max-width:560px){.cta-box{padding:46px 24px;}.cta-btns .btn-white{width:100%;justify-content:center;}}
+
+footer{border-top:1px solid var(--line);background:var(--surface);}
+.foot{max-width:var(--maxw);margin:0 auto;padding:34px 40px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.foot-l .logo-m{font-size:19px;}
+.foot-l .logo-s{margin-top:4px;}
+.fli{display:flex;gap:22px;flex-wrap:wrap;}
+.fli a{font-size:13.5px;color:var(--ink-2);text-decoration:none;transition:color .2s;}
+.fli a:hover{color:var(--accent);}
+.fco{font-size:12px;color:var(--ink-3);width:100%;border-top:1px solid var(--line);padding-top:20px;}
+@media(max-width:680px){.foot{flex-direction:column;align-items:flex-start;}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}.r{opacity:1;transform:none;}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="logo"><span class="logo-m">EKON <span>CRM</span></span><span class="logo-s">Wholesale Real Estate Platform</span></a>
+  <ul class="nlinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="plans.html">Pricing</a></li>
+    <li><a href="affiliate.html" class="act">Affiliates</a></li>
+    <li><a href="privacy.html">Privacy</a></li>
+    <li><a href="terms.html">Terms</a></li>
+  </ul>
+  <div class="nr-desktop">
+    <a href="mailto:support@ekoncrm.com" class="nbtn">Apply now
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+  <button class="hbg" aria-label="Open menu" onclick="toggleSheet()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</nav>
+
+<div class="sheet" id="sheet" onclick="if(event.target===this)toggleSheet()">
+  <div class="sheet-in">
+    <button class="sheet-x" aria-label="Close menu" onclick="toggleSheet()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <a href="index.html">Home</a>
+    <a href="plans.html">Pricing</a>
+    <a href="affiliate.html">Affiliates</a>
+    <div class="sheet-div"></div>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Use</a>
+    <a href="https://discord.gg/2HZ8P2bZ2W" target="_blank" rel="noopener">Join our Discord</a>
+    <a href="mailto:support@ekoncrm.com" class="sheet-cta">Apply now →</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="ahero">
+  <span class="big-badge r">💸 30% recurring · paid monthly</span>
+  <h1 class="r d1">Get paid <em>every single month.</em></h1>
+  <p class="sub r d2" style="margin:0 auto;">Refer wholesalers to EKON CRM and earn <b>30% recurring commission</b> for as long as they stay subscribed. No cap. No expiration. Real monthly income.</p>
+  <div class="stat-row">
+    <div class="stat r d1"><div class="stat-n">30%</div><div class="stat-l">Recurring commission</div></div>
+    <div class="stat r d2"><div class="stat-n">Monthly</div><div class="stat-l">Paid out, not one-time</div></div>
+    <div class="stat r d3"><div class="stat-n">No cap</div><div class="stat-l">Refer as many as you want</div></div>
+  </div>
+</header>
+
+<!-- CALCULATOR -->
+<section class="sec" style="padding-top:48px;">
+  <div class="ctr"><span class="eye r">Earnings calculator</span><h2 class="lead r d1" style="margin:16px 0 36px;font-size:clamp(26px,4vw,40px);">See what you'd <em>make.</em></h2></div>
+  <div class="calc r d2">
+    <div class="calc-top">
+      <h3>Your monthly payout</h3>
+      <div class="toggle" id="toggle">
+        <button data-plan="exec" class="on">Executive ($97)</button>
+        <button data-plan="hosted">Hosted ($120)</button>
+      </div>
+    </div>
+    <div class="calc-label"><span>Active referrals</span><b id="refOut">5</b></div>
+    <input type="range" id="slider" min="1" max="50" value="5">
+    <div class="calc-out">
+      <div class="co"><div class="co-l">Per month</div><div class="co-n" id="moOut">$145.50</div></div>
+      <div class="co hi"><div class="co-l">Per year</div><div class="co-n" id="yrOut">$1,746</div></div>
+    </div>
+    <p class="calc-note">Based on 30% of the monthly plan price, paid every month your referral stays active. Executive = $29.10/mo each · Hosted = $36.00/mo each.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec ctr">
+  <span class="eye r">How it works</span>
+  <h2 class="lead r d1" style="margin-top:16px;font-size:clamp(26px,4vw,40px);">Four steps to <em>recurring income.</em></h2>
+  <div class="steps">
+    <div class="step r d1"><div class="step-n">01</div><div class="step-t">Apply</div><div class="step-d">Email us to join the affiliate program. We'll get you set up with your referral link.</div></div>
+    <div class="step r d2"><div class="step-n">02</div><div class="step-t">Share</div><div class="step-d">Promote EKON CRM to your audience — content, DMs, your Discord, your community.</div></div>
+    <div class="step r d3"><div class="step-n">03</div><div class="step-t">They subscribe</div><div class="step-d">When someone signs up through your link, they're tagged to you for life.</div></div>
+    <div class="step r d4"><div class="step-n">04</div><div class="step-t">Get paid monthly</div><div class="step-d">Earn 30% of their plan every single month they stay subscribed. No cap.</div></div>
+  </div>
+</section>
+
+<!-- COMMISSION BREAKDOWN -->
+<section class="sec ctr">
+  <span class="eye r">Commission breakdown</span>
+  <h2 class="lead r d1" style="margin-top:16px;font-size:clamp(26px,4vw,40px);">What each referral <em>is worth.</em></h2>
+  <p class="sub r d2" style="margin-top:14px;">30% of the monthly plan price, recurring. Here's the math.</p>
+  <div class="bgrid">
+    <div class="bc r d1">
+      <div class="bc-top"><span class="bc-name">Executive referral</span><span class="bc-tag">$97/mo plan</span></div>
+      <div class="bc-rate">$29.10</div>
+      <div class="bc-per">per month, per active referral</div>
+      <div class="bc-yr">That's <b>~$349/year</b> from a single referral who stays subscribed.</div>
+    </div>
+    <div class="bc feat r d2">
+      <div class="bc-top"><span class="bc-name">Hosted referral</span><span class="bc-tag">$120/mo plan</span></div>
+      <div class="bc-rate">$36.00</div>
+      <div class="bc-per">per month, per active referral</div>
+      <div class="bc-yr">That's <b>$432/year</b> from a single referral who stays subscribed.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="sec ctr">
+  <span class="eye r">Who it's for</span>
+  <h2 class="lead r d1" style="margin-top:16px;font-size:clamp(26px,4vw,40px);">Built for people with <em>an audience.</em></h2>
+  <div class="wgrid">
+    <div class="wc r d1"><div class="wc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div><div class="wc-t">TikTok creators</div><div class="wc-d">Real estate, hustle, and business content that drives signups.</div></div>
+    <div class="wc r d2"><div class="wc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8.5a5 5 0 0 0-3.5-4.8C16.7 3.2 12 3.2 12 3.2s-4.7 0-6.5.5A5 5 0 0 0 2 8.5a52 52 0 0 0 0 7 5 5 0 0 0 3.5 4.8c1.8.5 6.5.5 6.5.5s4.7 0 6.5-.5A5 5 0 0 0 22 15.5a52 52 0 0 0 0-7z"/><path d="M10 15l5-3-5-3z"/></svg></div><div class="wc-t">YouTubers</div><div class="wc-d">Tutorials and reviews where EKON CRM fits naturally.</div></div>
+    <div class="wc r d3"><div class="wc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="wc-t">Discord &amp; communities</div><div class="wc-d">Coaching groups and communities full of active wholesalers.</div></div>
+    <div class="wc r d4"><div class="wc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div><div class="wc-t">Wholesalers</div><div class="wc-d">Already using EKON CRM? Refer peers and stack recurring income.</div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec">
+  <div class="ctr"><span class="eye r">Questions</span><h2 class="lead r d1" style="margin:16px 0 40px;font-size:clamp(26px,4vw,40px);">Affiliate <em>FAQ.</em></h2></div>
+  <div class="faq">
+    <details class="fitem r"><summary>How much do I earn per referral? <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">30% of the plan price every month: <b>$29.10/mo</b> for an Executive referral ($97 plan) and <b>$36.00/mo</b> for a Hosted referral ($120 plan). You keep earning for as long as they stay subscribed.</div></details>
+    <details class="fitem r"><summary>Is the commission really recurring? <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">Yes. It's not a one-time payout — you're paid <b>every month</b> the referral remains active. Five active Hosted referrals is $180/mo, every month.</div></details>
+    <details class="fitem r"><summary>Is there a cap on referrals? <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">No cap and no expiration. Refer as many people as you want — the more active subscribers under you, the more you earn each month.</div></details>
+    <details class="fitem r"><summary>How and when do I get paid? <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">Commissions are paid out monthly. We'll cover exact payout details and your referral link when you're approved into the program.</div></details>
+    <details class="fitem r"><summary>How do I join? <span class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="ans">Email <b>support@ekoncrm.com</b> to apply. We typically respond within 48 hours with your link and next steps.</div></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-box r">
+    <span class="eye">Start earning</span>
+    <h2>Turn your audience into income.</h2>
+    <p>Apply to the EKON CRM affiliate program and start earning 30% recurring on every wholesaler you refer.</p>
+    <div class="cta-btns">
+      <a href="mailto:support@ekoncrm.com?subject=EKON%20CRM%20Affiliate%20Application" class="btn-white">Apply now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot">
+    <a href="index.html" class="logo foot-l"><span class="logo-m">EKON <span>CRM</span></span><span class="logo-s">Powered by GoHighLevel · EKON Investments LLC</span></a>
+    <div class="fli">
+      <a href="index.html">Home</a>
+      <a href="plans.html">Pricing</a>
+      <a href="affiliate.html">Affiliates</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="https://discord.gg/2HZ8P2bZ2W" target="_blank" rel="noopener">Discord</a>
+      <a href="mailto:support@ekoncrm.com">support@ekoncrm.com</a>
+    </div>
+    <p class="fco">© 2026 EKON Investments LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+function toggleSheet(){const s=document.getElementById('sheet');s.classList.toggle('open');document.body.style.overflow=s.classList.contains('open')?'hidden':'';}
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.08});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+
+const rates={exec:29.10,hosted:36.00};
+let plan='exec';
+const slider=document.getElementById('slider');
+const refOut=document.getElementById('refOut');
+const moOut=document.getElementById('moOut');
+const yrOut=document.getElementById('yrOut');
+const fmt=n=>'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const fmt0=n=>'$'+Math.round(n).toLocaleString('en-US');
+function paint(){
+  const r=+slider.value;
+  refOut.textContent=r;
+  const mo=r*rates[plan];
+  moOut.textContent=fmt(mo);
+  yrOut.textContent=fmt0(mo*12);
+  const pct=((r-1)/(50-1))*100;
+  slider.style.background=`linear-gradient(90deg,var(--accent) 0%,var(--accent) ${pct}%,var(--surface-2) ${pct}%)`;
+}
+slider.addEventListener('input',paint);
+document.querySelectorAll('#toggle button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#toggle button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');plan=b.dataset.plan;paint();
+}));
+paint();
+</script>
+</body>
+</html>
